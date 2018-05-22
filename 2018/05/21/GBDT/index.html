@@ -108,26 +108,28 @@
 
 
 
-  <meta name="description" content="机器学习评估系统机器学习(ML),自然语言处理(NLP),信息检索(IR)等领域,评估(Evaluation)是一个必要的工作,而其评价指标往往有如下几点:准确率(Accuracy),精确率(Precision),召回率(Recall)和F1-Measure。     正类(positive) 负类(negative)     True TP TN   False FP（Type I Error）">
+  <meta name="description" content="Gradient Boosting Decision Tree GBDT综述Model：假设我们有k棵回归树 $$H(x) = \sum_{k=1}^{K}{f_k(x_i),}   \quad f_k\in F$$ Parameter:每一个参数就就是一棵不同的回归树$$\Theta = {f_1, f_2, … f_T}$$ Object function:前一部分为损失函数，后一部分为正则项">
+<meta name="keywords" content="machine learning">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Andong&#39;s Blogs">
-<meta property="og:url" content="http://yoursite.com/2018/05/14/机器学习评估指标/index.html">
+<meta property="og:title" content="GBDT">
+<meta property="og:url" content="http://yoursite.com/2018/05/21/GBDT/index.html">
 <meta property="og:site_name" content="Andong&#39;s Blogs">
-<meta property="og:description" content="机器学习评估系统机器学习(ML),自然语言处理(NLP),信息检索(IR)等领域,评估(Evaluation)是一个必要的工作,而其评价指标往往有如下几点:准确率(Accuracy),精确率(Precision),召回率(Recall)和F1-Measure。     正类(positive) 负类(negative)     True TP TN   False FP（Type I Error）">
+<meta property="og:description" content="Gradient Boosting Decision Tree GBDT综述Model：假设我们有k棵回归树 $$H(x) = \sum_{k=1}^{K}{f_k(x_i),}   \quad f_k\in F$$ Parameter:每一个参数就就是一棵不同的回归树$$\Theta = {f_1, f_2, … f_T}$$ Object function:前一部分为损失函数，后一部分为正则项">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://github.com/Leeandong/markdown_pictures/raw/master/evaluation-and-credibilitypart-2-43-638.jpg">
-<meta property="og:updated_time" content="2018-05-14T11:20:03.094Z">
+<meta property="og:image" content="https://github.com/Leeandong/markdown_pictures/blob/master/GBDT算法.png?raw=true">
+<meta property="og:image" content="https://github.com/Leeandong/markdown_pictures/blob/master/GBDT节点分裂算法.png?raw=true">
+<meta property="og:updated_time" content="2018-05-22T02:30:38.722Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Andong&#39;s Blogs">
-<meta name="twitter:description" content="机器学习评估系统机器学习(ML),自然语言处理(NLP),信息检索(IR)等领域,评估(Evaluation)是一个必要的工作,而其评价指标往往有如下几点:准确率(Accuracy),精确率(Precision),召回率(Recall)和F1-Measure。     正类(positive) 负类(negative)     True TP TN   False FP（Type I Error）">
-<meta name="twitter:image" content="https://github.com/Leeandong/markdown_pictures/raw/master/evaluation-and-credibilitypart-2-43-638.jpg">
+<meta name="twitter:title" content="GBDT">
+<meta name="twitter:description" content="Gradient Boosting Decision Tree GBDT综述Model：假设我们有k棵回归树 $$H(x) = \sum_{k=1}^{K}{f_k(x_i),}   \quad f_k\in F$$ Parameter:每一个参数就就是一棵不同的回归树$$\Theta = {f_1, f_2, … f_T}$$ Object function:前一部分为损失函数，后一部分为正则项">
+<meta name="twitter:image" content="https://github.com/Leeandong/markdown_pictures/blob/master/GBDT算法.png?raw=true">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/14/机器学习评估指标/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/21/GBDT/"/>
 
 
 
@@ -137,7 +139,7 @@
   };
 </script>
 
-  <title> | Andong's Blogs</title>
+  <title>GBDT | Andong's Blogs</title>
   
 
 
@@ -282,7 +284,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/14/机器学习评估指标/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/21/GBDT/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Andong Lee">
@@ -299,7 +301,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h1 class="post-title" itemprop="name headline">GBDT
               
             
           </h1>
@@ -324,12 +326,24 @@
                 
               
 
-              <time title="Created: 2018-05-14 18:14:39 / Modified: 19:20:03" itemprop="dateCreated datePublished" datetime="2018-05-14T18:14:39+08:00">2018-05-14</time>
+              <time title="Created: 2018-05-21 16:22:37" itemprop="dateCreated datePublished" datetime="2018-05-21T16:22:37+08:00">2018-05-21</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-05-22 10:30:38" itemprop="dateModified" datetime="2018-05-22T10:30:38+08:00">2018-05-22</time>
               
             
           </span>
@@ -362,43 +376,34 @@
       
 
       
-        <h2 id="机器学习评估系统"><a href="#机器学习评估系统" class="headerlink" title="机器学习评估系统"></a>机器学习评估系统</h2><p>机器学习(ML),自然语言处理(NLP),信息检索(IR)等领域,评估(Evaluation)是一个必要的工作,而其评价指标往往有如下几点:准确率(Accuracy),精确率(Precision),召回率(Recall)和F1-Measure。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left"></th>
-<th>正类(positive)</th>
-<th>负类(negative)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">True</td>
-<td>TP</td>
-<td>TN</td>
-</tr>
-<tr>
-<td style="text-align:left">False</td>
-<td>FP（Type I Error）</td>
-<td>FN(Type II Error)</td>
-</tr>
-</tbody>
-</table>
-<p>精确率(Precision)：Precision is the number of document retrieved that are relevant<br>$$<br>P=\frac{TP}{TP+FP}<br>$$<br>所有被划分为正样本中正确的比例。高精确率意味着分类中垃圾很少。</p>
-<p>召回率(recall)：Recall is the number of relevant document that are retrieved.<br>$$<br>R=\frac{TP}{TP+FN}<br>$$<br>所有的正样本中被正确分类所占的比例，高召回率意味着很少有相关的数据被遗漏。</p>
-<p>F1-measure :F1值就是精确值和召回率的调和均值<br>$$<br>\frac{1}{F1}=\frac{1}{P}+\frac{1}{R}<br>$$<br><img src="https://github.com/Leeandong/markdown_pictures/raw/master/evaluation-and-credibilitypart-2-43-638.jpg" alt=""></p>
+        <h2 id="Gradient-Boosting-Decision-Tree"><a href="#Gradient-Boosting-Decision-Tree" class="headerlink" title="Gradient Boosting Decision Tree"></a>Gradient Boosting Decision Tree</h2><hr>
+<h3 id="GBDT综述"><a href="#GBDT综述" class="headerlink" title="GBDT综述"></a>GBDT综述</h3><h4 id="Model："><a href="#Model：" class="headerlink" title="Model："></a>Model：</h4><p>假设我们有k棵回归树</p>
+<p>$$<br>H(x) = \sum_{k=1}^{K}{f_k(x_i),}   \quad f_k\in F<br>$$</p>
+<h4 id="Parameter"><a href="#Parameter" class="headerlink" title="Parameter:"></a>Parameter:</h4><p>每一个参数就就是一棵不同的回归树<br>$$<br>\Theta = {f_1, f_2, … f_T}<br>$$</p>
+<h4 id="Object-function"><a href="#Object-function" class="headerlink" title="Object function:"></a>Object function:</h4><p>前一部分为损失函数，后一部分为正则项。<br>$$<br>Obj = \sum_{i=1}^nl(y_i,\hat y_i)+\sum_{k=1}^K \Omega(f_k)<br>$$</p>
 <hr>
-<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><ul>
-<li><a href="https://towardsdatascience.com/model-evaluation-i-precision-and-recall-166ddb257c7b" target="_blank" rel="noopener">Model Evaluation I: Precision And Recall</a></li>
-</ul>
-<ul>
-<li><a href="https://blog.argcv.com/articles/1036.c" target="_blank" rel="noopener">准确率(Accuracy), 精确率(Precision), 召回率(Recall)和F1-Measure</a></li>
-</ul>
-<blockquote>
-<p><strong>Post author:</strong>  Andong Lee</p>
-<p><strong>Post link:</strong> <a href="https://jdhao.github.io/2018/5/14" target="_blank" rel="noopener">https://jdhao.github.io/2018/5/14</a></p>
-<p><strong>Copyright Notice:</strong>  All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> unless stating additionally.</p>
-</blockquote>
+<p>算法流程</p>
+<p><img src="https://github.com/Leeandong/markdown_pictures/blob/master/GBDT算法.png?raw=true" alt="image-20180521163547532"></p>
+<hr>
+<h3 id="如何进行训练"><a href="#如何进行训练" class="headerlink" title="如何进行训练"></a>如何进行训练</h3><p>当训练到第t次时，<br>$$<br>Obj^{(t)} = \sum_{i=1}^nl(y_i,\hat y_i^{(t-1)}+f_t(x))+\Omega(f_t)+constant<br>$$</p>
+<p>令$g_i = \frac{\partial(y_i,\hat y_i)}{\partial\hat y_i}|_{\hat y_i = \hat y^{(t-1)}}​$ , $h_i = \frac{\partial^2(y_i,\hat y_i)}{\partial\hat y_i^2}|_{\hat y_i = \hat y^{(t-1)}}​$</p>
+<p>则对目标函数做泰勒展开可以得到<br>$$<br>\begin{aligned}<br>Obj^{(t)} &amp;\approx \sum_{i=1}^n \left(l (y_i,\hat y_i^{(t-1)})+ g_if_t(x_i)+\frac{1}{2}h_if_t^2(x_i) \right)+\Omega(f_t)+constant\\<br>&amp;= \sum_{i=1}^n \left( g_if_t(x_i)+\frac{1}{2}h_if_t^2(x_i)  \right)+\Omega(f_t)+constant\\<br>\end{aligned}<br>$$<br>可以看到第t步的目标函数依赖于$g_i$和$h_i$函数，以及$\hat y^{(t-1)}$的值。</p>
+<p>定义回归树函数为：<br>$$<br>f_t(x)=w_{q(x)}  \quad w\in R^T, q: R^d \to {1,2,…,T}<br>$$<br>再定义回归树的惩罚函数为：<br>$$<br>\Omega(f_t) =\gamma T + \frac{1}{2}\lambda \sum_{j=1}^T{w_j^2}<br>$$</p>
+<p>此时将回归树模型代入上述的目标函数中，并令$I_j = { x_i | q(x_i) = j }$, 再按照叶子结点来将输入分组，则可以得到<br>$$<br>\begin{aligned}<br>Obj^{(t)} &amp;\approx \sum_{i=1}^n \left( g_if_t(x_i)+\frac{1}{2}h_if_t^2(x_i)  \right)+\Omega(f_t)\\<br>&amp;=\sum_{i=1}^n \left( g_iw_q(x_i) + \frac{1}{2}h_iw_q^2(x_i)  \right)+ \gamma T + \frac{1}{2}\lambda \sum_{j=1}^T{w_j^2} \\<br>&amp;= \sum_{j=1}^T \left(   (\sum_{i\in I_j} {g_i})w_j +\frac{1}{2} (\sum_{i\in I_j} {h_i+\lambda})w_j^2  \right) + \gamma T<br>\end{aligned}<br>$$<br>再令$G_j = \sum_{i \in I_j } g_i$, $H_j = \sum_{i \in I_j } h_i$<br>$$<br>\begin{aligned}<br>Obj^{(t)}  &amp;= \sum_{j=1}^T \left(   (\sum_{i\in I_j} {g_i})w_j +\frac{1}{2} (\sum_{i\in I_j} {h_i+\lambda})w_j^2  \right) + \gamma T \\<br>&amp; = \sum_{j=1}^T \left(   G_jw_j +\frac{1}{2} (H_j+\lambda)w_j^2  \right) + \gamma T \\<br>\end{aligned}<br>$$<br>则当树的结构确定的时候，最优的叶子权重值以及最优的目标函数值就为<br>$$<br>w^*_j = -\frac{G_j}{H_j+\lambda} \qquad<br>Obj =-\frac{1}{2}\sum_{j=1}^{T}\frac{G_j^2}{H_j+\lambda} + \gamma T<br>$$</p>
+<p>这样我们就确定了对于单棵树的搜索算法</p>
+<p>1.枚举出所有树的可能性</p>
+<p>2.计算出对应每种树的目标函数，选择最大的作为此次构造的树的结构</p>
+<p>3.在选取的树的结构下,计算出每个叶子结点的最优权值</p>
+<p>但是树的所有的可能性是无穷的，我们使用贪心算法，将这个目标函数作为信息增益，自顶向下建立出整棵树，</p>
+<p>这样整个树的算法变为了</p>
+<p>1.初始深度为0</p>
+<p>2.对每一个叶节点，判断是否会分裂<br>$$<br>Gain = \frac{1}{2}\left[  \frac{G_L^2}{H_L+\lambda}+\frac{G_R^2}{H_R+\lambda}-<br>\frac{G_R^2+G_L^2}{H_L+H_R+\lambda} - \gamma       \right]<br>$$<br>依次扫描所有的属性，对同一个属性，从左向右的扫描所有的点，从而选出gain最高的点，如果gain&gt;threshold，则进行分裂。</p>
+<p>分裂算法如下：</p>
+<p><img src="https://github.com/Leeandong/markdown_pictures/blob/master/GBDT节点分裂算法.png?raw=true" alt="image-20180521160739943"></p>
+<p>算法的时间复杂度为 O(ndKlogn)</p>
+<hr>
+<p>[1].Introduction to Boosted Trees            Tiani Chen </p>
+<p>[2].</p>
 
       
     </div>
@@ -417,6 +422,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/machine-learning/" rel="tag"># machine learning</a>
+          
+        </div>
+      
 
       
       
@@ -426,8 +437,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/14/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2018/05/21/排序算法复杂度分析/" rel="next" title="排序时间复杂度分析">
+                <i class="fa fa-chevron-left"></i> 排序时间复杂度分析
               </a>
             
           </div>
@@ -436,8 +447,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/05/18/Adaboost/" rel="prev" title="Adaboost">
-                Adaboost <i class="fa fa-chevron-right"></i>
+              <a href="/2018/05/22/test/" rel="prev" title="test">
+                test <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -567,7 +578,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#机器学习评估系统"><span class="nav-number">1.</span> <span class="nav-text">机器学习评估系统</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#参考"><span class="nav-number">1.0.1.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Gradient-Boosting-Decision-Tree"><span class="nav-number">1.</span> <span class="nav-text">Gradient Boosting Decision Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GBDT综述"><span class="nav-number">1.1.</span> <span class="nav-text">GBDT综述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Model："><span class="nav-number">1.1.1.</span> <span class="nav-text">Model：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Parameter"><span class="nav-number">1.1.2.</span> <span class="nav-text">Parameter:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Object-function"><span class="nav-number">1.1.3.</span> <span class="nav-text">Object function:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何进行训练"><span class="nav-number">1.2.</span> <span class="nav-text">如何进行训练</span></a></li></ol></li></ol></div>
             
 
           </div>

@@ -277,6 +277,483 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/22/test/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Andong Lee">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andong's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/22/test/" itemprop="url">
+                  test
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-05-22 09:35:06 / Modified: 09:59:16" itemprop="dateCreated datePublished" datetime="2018-05-22T09:35:06+08:00">2018-05-22</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/21/GBDT/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Andong Lee">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andong's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/21/GBDT/" itemprop="url">
+                  GBDT
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-05-21 16:22:37" itemprop="dateCreated datePublished" datetime="2018-05-21T16:22:37+08:00">2018-05-21</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-05-22 10:30:38" itemprop="dateModified" datetime="2018-05-22T10:30:38+08:00">2018-05-22</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Gradient-Boosting-Decision-Tree"><a href="#Gradient-Boosting-Decision-Tree" class="headerlink" title="Gradient Boosting Decision Tree"></a>Gradient Boosting Decision Tree</h2><hr>
+<h3 id="GBDT综述"><a href="#GBDT综述" class="headerlink" title="GBDT综述"></a>GBDT综述</h3><h4 id="Model："><a href="#Model：" class="headerlink" title="Model："></a>Model：</h4><p>假设我们有k棵回归树</p>
+<p>$$<br>H(x) = \sum_{k=1}^{K}{f_k(x_i),}   \quad f_k\in F<br>$$</p>
+<h4 id="Parameter"><a href="#Parameter" class="headerlink" title="Parameter:"></a>Parameter:</h4><p>每一个参数就就是一棵不同的回归树<br>$$<br>\Theta = {f_1, f_2, … f_T}<br>$$</p>
+<h4 id="Object-function"><a href="#Object-function" class="headerlink" title="Object function:"></a>Object function:</h4><p>前一部分为损失函数，后一部分为正则项。<br>$$<br>Obj = \sum_{i=1}^nl(y_i,\hat y_i)+\sum_{k=1}^K \Omega(f_k)<br>$$</p>
+<hr>
+<p>算法流程</p>
+<p><img src="https://github.com/Leeandong/markdown_pictures/blob/master/GBDT算法.png?raw=true" alt="image-20180521163547532"></p>
+<hr>
+<h3 id="如何进行训练"><a href="#如何进行训练" class="headerlink" title="如何进行训练"></a>如何进行训练</h3><p>当训练到第t次时，<br>$$<br>Obj^{(t)} = \sum_{i=1}^nl(y_i,\hat y_i^{(t-1)}+f_t(x))+\Omega(f_t)+constant<br>$$</p>
+<p>令$g_i = \frac{\partial(y_i,\hat y_i)}{\partial\hat y_i}|_{\hat y_i = \hat y^{(t-1)}}​$ , $h_i = \frac{\partial^2(y_i,\hat y_i)}{\partial\hat y_i^2}|_{\hat y_i = \hat y^{(t-1)}}​$</p>
+<p>则对目标函数做泰勒展开可以得到<br>$$<br>\begin{aligned}<br>Obj^{(t)} &amp;\approx \sum_{i=1}^n \left(l (y_i,\hat y_i^{(t-1)})+ g_if_t(x_i)+\frac{1}{2}h_if_t^2(x_i) \right)+\Omega(f_t)+constant\\<br>&amp;= \sum_{i=1}^n \left( g_if_t(x_i)+\frac{1}{2}h_if_t^2(x_i)  \right)+\Omega(f_t)+constant\\<br>\end{aligned}<br>$$<br>可以看到第t步的目标函数依赖于$g_i$和$h_i$函数，以及$\hat y^{(t-1)}$的值。</p>
+<p>定义回归树函数为：<br>$$<br>f_t(x)=w_{q(x)}  \quad w\in R^T, q: R^d \to {1,2,…,T}<br>$$<br>再定义回归树的惩罚函数为：<br>$$<br>\Omega(f_t) =\gamma T + \frac{1}{2}\lambda \sum_{j=1}^T{w_j^2}<br>$$</p>
+<p>此时将回归树模型代入上述的目标函数中，并令$I_j = { x_i | q(x_i) = j }$, 再按照叶子结点来将输入分组，则可以得到<br>$$<br>\begin{aligned}<br>Obj^{(t)} &amp;\approx \sum_{i=1}^n \left( g_if_t(x_i)+\frac{1}{2}h_if_t^2(x_i)  \right)+\Omega(f_t)\\<br>&amp;=\sum_{i=1}^n \left( g_iw_q(x_i) + \frac{1}{2}h_iw_q^2(x_i)  \right)+ \gamma T + \frac{1}{2}\lambda \sum_{j=1}^T{w_j^2} \\<br>&amp;= \sum_{j=1}^T \left(   (\sum_{i\in I_j} {g_i})w_j +\frac{1}{2} (\sum_{i\in I_j} {h_i+\lambda})w_j^2  \right) + \gamma T<br>\end{aligned}<br>$$<br>再令$G_j = \sum_{i \in I_j } g_i$, $H_j = \sum_{i \in I_j } h_i$<br>$$<br>\begin{aligned}<br>Obj^{(t)}  &amp;= \sum_{j=1}^T \left(   (\sum_{i\in I_j} {g_i})w_j +\frac{1}{2} (\sum_{i\in I_j} {h_i+\lambda})w_j^2  \right) + \gamma T \\<br>&amp; = \sum_{j=1}^T \left(   G_jw_j +\frac{1}{2} (H_j+\lambda)w_j^2  \right) + \gamma T \\<br>\end{aligned}<br>$$<br>则当树的结构确定的时候，最优的叶子权重值以及最优的目标函数值就为<br>$$<br>w^*_j = -\frac{G_j}{H_j+\lambda} \qquad<br>Obj =-\frac{1}{2}\sum_{j=1}^{T}\frac{G_j^2}{H_j+\lambda} + \gamma T<br>$$</p>
+<p>这样我们就确定了对于单棵树的搜索算法</p>
+<p>1.枚举出所有树的可能性</p>
+<p>2.计算出对应每种树的目标函数，选择最大的作为此次构造的树的结构</p>
+<p>3.在选取的树的结构下,计算出每个叶子结点的最优权值</p>
+<p>但是树的所有的可能性是无穷的，我们使用贪心算法，将这个目标函数作为信息增益，自顶向下建立出整棵树，</p>
+<p>这样整个树的算法变为了</p>
+<p>1.初始深度为0</p>
+<p>2.对每一个叶节点，判断是否会分裂<br>$$<br>Gain = \frac{1}{2}\left[  \frac{G_L^2}{H_L+\lambda}+\frac{G_R^2}{H_R+\lambda}-<br>\frac{G_R^2+G_L^2}{H_L+H_R+\lambda} - \gamma       \right]<br>$$<br>依次扫描所有的属性，对同一个属性，从左向右的扫描所有的点，从而选出gain最高的点，如果gain&gt;threshold，则进行分裂。</p>
+<p>分裂算法如下：</p>
+<p><img src="https://github.com/Leeandong/markdown_pictures/blob/master/GBDT节点分裂算法.png?raw=true" alt="image-20180521160739943"></p>
+<p>算法的时间复杂度为 O(ndKlogn)</p>
+<hr>
+<p>[1].Introduction to Boosted Trees            Tiani Chen </p>
+<p>[2].</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/21/排序算法复杂度分析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Andong Lee">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andong's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/21/排序算法复杂度分析/" itemprop="url">
+                  排序时间复杂度分析
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-05-21 09:35:06" itemprop="dateCreated datePublished" datetime="2018-05-21T09:35:06+08:00">2018-05-21</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-05-22 10:01:30" itemprop="dateModified" datetime="2018-05-22T10:01:30+08:00">2018-05-22</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>本篇主要分析一下常用的排序算法时间复杂度</p>
+<hr>
+<h3 id="快速排序："><a href="#快速排序：" class="headerlink" title="快速排序："></a>快速排序：</h3><h5 id="平均时间复杂度："><a href="#平均时间复杂度：" class="headerlink" title="平均时间复杂度："></a>平均时间复杂度：</h5><p>通过快速排序的定义我们可以自然的得到任意两个元素最多比较1次。</p>
+<p>我们令t为排序好的序列,即t=sort(p),</p>
+<p>定义随机变量$Y(n)$表示大小为n的数组再快速排序中所需要做的比较的次数</p>
+<p>再定义随机变量：<br>$$<br>X_{i,j} =<br>\begin{cases}<br>1 \quad if\;t_i\,and\,t_j\,are\,compared\,by\,quicksort\\<br>0 \quad otherwise<br>\end{cases}<br>$$<br>则<br>$$<br>Y(n)\le\sum_{i=1}^{n-1}\sum_{j=i+1}^{n}X_{i,j}<br>$$<br>由期望的线性可加性<br>$$<br>E[Y(n)]\le\sum_{i=1}^{n-1}\sum_{j=i+1}^{n}E[X_{i,j}]<br>$$<br>又由于X_{i,j}是一个indicator random variable, 则有　<br>$$<br>E[X_{i,j}] = P[X_{i,j}=1]<br>$$<br>又我们可以得到在序列中，两个元素相互比较当且仅当${t_i,t_{i+1},…t_j}$ 中$t_i$或者$t_j$ 被选中作为pivot。<br>$$<br>P[X_{i,j}=1] = \frac{2}{j-i+1}<br>$$<br>则可得<br>$$<br>\begin{aligned}<br>E[Y(n)]&amp;\le\sum_{i=1}^{n-1}\sum_{j=i+1}^{n} \frac{2}{j-i+1}\\<br>    &amp;= \sum_{i=1}^{n-1}\sum_{k=2}^{n-i+1}\frac{2}{k}\\<br>    &amp;\le 2n\sum_{i=1}^{n-1}H_n\\<br>    &amp;=2nH(n) \in O(nlogn)<br>\end{aligned}<br>$$</p>
+<hr>
+<p>[1] </p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/18/Adaboost/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -804,7 +1281,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -812,6 +1289,21 @@
 
               
 
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
               
             </nav>
           
@@ -1013,6 +1505,12 @@
 
   
   
+    
+      
+    
+      
+    
+      
     
       
     

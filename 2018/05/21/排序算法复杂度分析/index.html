@@ -108,26 +108,25 @@
 
 
 
-  <meta name="description" content="机器学习评估系统机器学习(ML),自然语言处理(NLP),信息检索(IR)等领域,评估(Evaluation)是一个必要的工作,而其评价指标往往有如下几点:准确率(Accuracy),精确率(Precision),召回率(Recall)和F1-Measure。     正类(positive) 负类(negative)     True TP TN   False FP（Type I Error）">
+  <meta name="description" content="本篇主要分析一下常用的排序算法时间复杂度  快速排序：平均时间复杂度：通过快速排序的定义我们可以自然的得到任意两个元素最多比较1次。 我们令t为排序好的序列,即t=sort(p), 定义随机变量$Y(n)$表示大小为n的数组再快速排序中所需要做的比较的次数 再定义随机变量：$$X_{i,j} =\begin{cases}1 \quad if\;t_i\,and\,t_j\,are\,compare">
+<meta name="keywords" content="algorithm">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Andong&#39;s Blogs">
-<meta property="og:url" content="http://yoursite.com/2018/05/14/机器学习评估指标/index.html">
+<meta property="og:title" content="排序时间复杂度分析">
+<meta property="og:url" content="http://yoursite.com/2018/05/21/排序算法复杂度分析/index.html">
 <meta property="og:site_name" content="Andong&#39;s Blogs">
-<meta property="og:description" content="机器学习评估系统机器学习(ML),自然语言处理(NLP),信息检索(IR)等领域,评估(Evaluation)是一个必要的工作,而其评价指标往往有如下几点:准确率(Accuracy),精确率(Precision),召回率(Recall)和F1-Measure。     正类(positive) 负类(negative)     True TP TN   False FP（Type I Error）">
+<meta property="og:description" content="本篇主要分析一下常用的排序算法时间复杂度  快速排序：平均时间复杂度：通过快速排序的定义我们可以自然的得到任意两个元素最多比较1次。 我们令t为排序好的序列,即t=sort(p), 定义随机变量$Y(n)$表示大小为n的数组再快速排序中所需要做的比较的次数 再定义随机变量：$$X_{i,j} =\begin{cases}1 \quad if\;t_i\,and\,t_j\,are\,compare">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://github.com/Leeandong/markdown_pictures/raw/master/evaluation-and-credibilitypart-2-43-638.jpg">
-<meta property="og:updated_time" content="2018-05-14T11:20:03.094Z">
+<meta property="og:updated_time" content="2018-05-22T02:01:30.432Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Andong&#39;s Blogs">
-<meta name="twitter:description" content="机器学习评估系统机器学习(ML),自然语言处理(NLP),信息检索(IR)等领域,评估(Evaluation)是一个必要的工作,而其评价指标往往有如下几点:准确率(Accuracy),精确率(Precision),召回率(Recall)和F1-Measure。     正类(positive) 负类(negative)     True TP TN   False FP（Type I Error）">
-<meta name="twitter:image" content="https://github.com/Leeandong/markdown_pictures/raw/master/evaluation-and-credibilitypart-2-43-638.jpg">
+<meta name="twitter:title" content="排序时间复杂度分析">
+<meta name="twitter:description" content="本篇主要分析一下常用的排序算法时间复杂度  快速排序：平均时间复杂度：通过快速排序的定义我们可以自然的得到任意两个元素最多比较1次。 我们令t为排序好的序列,即t=sort(p), 定义随机变量$Y(n)$表示大小为n的数组再快速排序中所需要做的比较的次数 再定义随机变量：$$X_{i,j} =\begin{cases}1 \quad if\;t_i\,and\,t_j\,are\,compare">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/14/机器学习评估指标/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/21/排序算法复杂度分析/"/>
 
 
 
@@ -137,7 +136,7 @@
   };
 </script>
 
-  <title> | Andong's Blogs</title>
+  <title>排序时间复杂度分析 | Andong's Blogs</title>
   
 
 
@@ -282,7 +281,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/14/机器学习评估指标/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/21/排序算法复杂度分析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Andong Lee">
@@ -299,7 +298,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h1 class="post-title" itemprop="name headline">排序时间复杂度分析
               
             
           </h1>
@@ -324,12 +323,24 @@
                 
               
 
-              <time title="Created: 2018-05-14 18:14:39 / Modified: 19:20:03" itemprop="dateCreated datePublished" datetime="2018-05-14T18:14:39+08:00">2018-05-14</time>
+              <time title="Created: 2018-05-21 09:35:06" itemprop="dateCreated datePublished" datetime="2018-05-21T09:35:06+08:00">2018-05-21</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-05-22 10:01:30" itemprop="dateModified" datetime="2018-05-22T10:01:30+08:00">2018-05-22</time>
               
             
           </span>
@@ -362,43 +373,14 @@
       
 
       
-        <h2 id="机器学习评估系统"><a href="#机器学习评估系统" class="headerlink" title="机器学习评估系统"></a>机器学习评估系统</h2><p>机器学习(ML),自然语言处理(NLP),信息检索(IR)等领域,评估(Evaluation)是一个必要的工作,而其评价指标往往有如下几点:准确率(Accuracy),精确率(Precision),召回率(Recall)和F1-Measure。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left"></th>
-<th>正类(positive)</th>
-<th>负类(negative)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">True</td>
-<td>TP</td>
-<td>TN</td>
-</tr>
-<tr>
-<td style="text-align:left">False</td>
-<td>FP（Type I Error）</td>
-<td>FN(Type II Error)</td>
-</tr>
-</tbody>
-</table>
-<p>精确率(Precision)：Precision is the number of document retrieved that are relevant<br>$$<br>P=\frac{TP}{TP+FP}<br>$$<br>所有被划分为正样本中正确的比例。高精确率意味着分类中垃圾很少。</p>
-<p>召回率(recall)：Recall is the number of relevant document that are retrieved.<br>$$<br>R=\frac{TP}{TP+FN}<br>$$<br>所有的正样本中被正确分类所占的比例，高召回率意味着很少有相关的数据被遗漏。</p>
-<p>F1-measure :F1值就是精确值和召回率的调和均值<br>$$<br>\frac{1}{F1}=\frac{1}{P}+\frac{1}{R}<br>$$<br><img src="https://github.com/Leeandong/markdown_pictures/raw/master/evaluation-and-credibilitypart-2-43-638.jpg" alt=""></p>
+        <p>本篇主要分析一下常用的排序算法时间复杂度</p>
 <hr>
-<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><ul>
-<li><a href="https://towardsdatascience.com/model-evaluation-i-precision-and-recall-166ddb257c7b" target="_blank" rel="noopener">Model Evaluation I: Precision And Recall</a></li>
-</ul>
-<ul>
-<li><a href="https://blog.argcv.com/articles/1036.c" target="_blank" rel="noopener">准确率(Accuracy), 精确率(Precision), 召回率(Recall)和F1-Measure</a></li>
-</ul>
-<blockquote>
-<p><strong>Post author:</strong>  Andong Lee</p>
-<p><strong>Post link:</strong> <a href="https://jdhao.github.io/2018/5/14" target="_blank" rel="noopener">https://jdhao.github.io/2018/5/14</a></p>
-<p><strong>Copyright Notice:</strong>  All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> unless stating additionally.</p>
-</blockquote>
+<h3 id="快速排序："><a href="#快速排序：" class="headerlink" title="快速排序："></a>快速排序：</h3><h5 id="平均时间复杂度："><a href="#平均时间复杂度：" class="headerlink" title="平均时间复杂度："></a>平均时间复杂度：</h5><p>通过快速排序的定义我们可以自然的得到任意两个元素最多比较1次。</p>
+<p>我们令t为排序好的序列,即t=sort(p),</p>
+<p>定义随机变量$Y(n)$表示大小为n的数组再快速排序中所需要做的比较的次数</p>
+<p>再定义随机变量：<br>$$<br>X_{i,j} =<br>\begin{cases}<br>1 \quad if\;t_i\,and\,t_j\,are\,compared\,by\,quicksort\\<br>0 \quad otherwise<br>\end{cases}<br>$$<br>则<br>$$<br>Y(n)\le\sum_{i=1}^{n-1}\sum_{j=i+1}^{n}X_{i,j}<br>$$<br>由期望的线性可加性<br>$$<br>E[Y(n)]\le\sum_{i=1}^{n-1}\sum_{j=i+1}^{n}E[X_{i,j}]<br>$$<br>又由于X_{i,j}是一个indicator random variable, 则有　<br>$$<br>E[X_{i,j}] = P[X_{i,j}=1]<br>$$<br>又我们可以得到在序列中，两个元素相互比较当且仅当${t_i,t_{i+1},…t_j}$ 中$t_i$或者$t_j$ 被选中作为pivot。<br>$$<br>P[X_{i,j}=1] = \frac{2}{j-i+1}<br>$$<br>则可得<br>$$<br>\begin{aligned}<br>E[Y(n)]&amp;\le\sum_{i=1}^{n-1}\sum_{j=i+1}^{n} \frac{2}{j-i+1}\\<br>    &amp;= \sum_{i=1}^{n-1}\sum_{k=2}^{n-i+1}\frac{2}{k}\\<br>    &amp;\le 2n\sum_{i=1}^{n-1}H_n\\<br>    &amp;=2nH(n) \in O(nlogn)<br>\end{aligned}<br>$$</p>
+<hr>
+<p>[1] </p>
 
       
     </div>
@@ -417,6 +399,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/algorithm/" rel="tag"># algorithm</a>
+          
+        </div>
+      
 
       
       
@@ -426,8 +414,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/14/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2018/05/18/Adaboost/" rel="next" title="Adaboost">
+                <i class="fa fa-chevron-left"></i> Adaboost
               </a>
             
           </div>
@@ -436,8 +424,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/05/18/Adaboost/" rel="prev" title="Adaboost">
-                Adaboost <i class="fa fa-chevron-right"></i>
+              <a href="/2018/05/21/GBDT/" rel="prev" title="GBDT">
+                GBDT <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -567,7 +555,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#机器学习评估系统"><span class="nav-number">1.</span> <span class="nav-text">机器学习评估系统</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#参考"><span class="nav-number">1.0.1.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#快速排序："><span class="nav-number">1.</span> <span class="nav-text">快速排序：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#平均时间复杂度："><span class="nav-number">1.0.1.</span> <span class="nav-text">平均时间复杂度：</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
