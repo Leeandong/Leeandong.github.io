@@ -108,25 +108,25 @@
 
 
 
-  <meta name="description" content="本篇主要分析一下常用的排序算法时间复杂度  快速排序：平均时间复杂度：通过快速排序的定义我们可以自然的得到任意两个元素最多比较1次。 我们令t为排序好的序列,即t=sort(p), 定义随机变量$Y(n)$表示大小为n的数组再快速排序中所需要做的比较的次数 再定义随机变量：$$X_{i,j} =\begin{cases}1 \quad if\;t_i\,and\,t_j\,are\,compare">
-<meta name="keywords" content="algorithm">
+  <meta name="description" content="​    首先明确一些概念，对象(object)在C/C++中指的是执行环境中的一块儿存储区域(a region of storage)，该存储区域中的内容代表(represent)了该对象的值(value)。我们这里提到的“代表 ”，是说对于一个对象，当我们取出(fetch)它的值时，我们需要一定的类型(type)来引用它。使用不同的类型，对同一对象中的内容的解释可能会得到不同的值。变量(var">
+<meta name="keywords" content="C++">
 <meta property="og:type" content="article">
-<meta property="og:title" content="排序时间复杂度分析">
-<meta property="og:url" content="http://yoursite.com/2018/05/21/排序算法复杂度分析/index.html">
+<meta property="og:title" content="C++左值和右值">
+<meta property="og:url" content="http://yoursite.com/2018/06/15/C++左值和右值/index.html">
 <meta property="og:site_name" content="Andong&#39;s Blogs">
-<meta property="og:description" content="本篇主要分析一下常用的排序算法时间复杂度  快速排序：平均时间复杂度：通过快速排序的定义我们可以自然的得到任意两个元素最多比较1次。 我们令t为排序好的序列,即t=sort(p), 定义随机变量$Y(n)$表示大小为n的数组再快速排序中所需要做的比较的次数 再定义随机变量：$$X_{i,j} =\begin{cases}1 \quad if\;t_i\,and\,t_j\,are\,compare">
+<meta property="og:description" content="​    首先明确一些概念，对象(object)在C/C++中指的是执行环境中的一块儿存储区域(a region of storage)，该存储区域中的内容代表(represent)了该对象的值(value)。我们这里提到的“代表 ”，是说对于一个对象，当我们取出(fetch)它的值时，我们需要一定的类型(type)来引用它。使用不同的类型，对同一对象中的内容的解释可能会得到不同的值。变量(var">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-06-15T09:16:08.666Z">
+<meta property="og:updated_time" content="2018-06-15T09:05:16.398Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="排序时间复杂度分析">
-<meta name="twitter:description" content="本篇主要分析一下常用的排序算法时间复杂度  快速排序：平均时间复杂度：通过快速排序的定义我们可以自然的得到任意两个元素最多比较1次。 我们令t为排序好的序列,即t=sort(p), 定义随机变量$Y(n)$表示大小为n的数组再快速排序中所需要做的比较的次数 再定义随机变量：$$X_{i,j} =\begin{cases}1 \quad if\;t_i\,and\,t_j\,are\,compare">
+<meta name="twitter:title" content="C++左值和右值">
+<meta name="twitter:description" content="​    首先明确一些概念，对象(object)在C/C++中指的是执行环境中的一块儿存储区域(a region of storage)，该存储区域中的内容代表(represent)了该对象的值(value)。我们这里提到的“代表 ”，是说对于一个对象，当我们取出(fetch)它的值时，我们需要一定的类型(type)来引用它。使用不同的类型，对同一对象中的内容的解释可能会得到不同的值。变量(var">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/21/排序算法复杂度分析/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/15/C++左值和右值/"/>
 
 
 
@@ -136,7 +136,7 @@
   };
 </script>
 
-  <title>排序时间复杂度分析 | Andong's Blogs</title>
+  <title>C++左值和右值 | Andong's Blogs</title>
   
 
 
@@ -281,7 +281,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/21/排序算法复杂度分析/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/15/C++左值和右值/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Andong Lee">
@@ -298,7 +298,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">排序时间复杂度分析
+          <h1 class="post-title" itemprop="name headline">C++左值和右值
               
             
           </h1>
@@ -323,24 +323,12 @@
                 
               
 
-              <time title="Created: 2018-05-21 09:35:06" itemprop="dateCreated datePublished" datetime="2018-05-21T09:35:06+08:00">2018-05-21</time>
+              <time title="Created: 2018-06-15 16:30:06 / Modified: 17:05:16" itemprop="dateCreated datePublished" datetime="2018-06-15T16:30:06+08:00">2018-06-15</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-06-15 17:16:08" itemprop="dateModified" datetime="2018-06-15T17:16:08+08:00">2018-06-15</time>
               
             
           </span>
@@ -373,16 +361,28 @@
       
 
       
-        <p>本篇主要分析一下常用的排序算法时间复杂度</p>
-<hr>
-<h3 id="快速排序："><a href="#快速排序：" class="headerlink" title="快速排序："></a>快速排序：</h3><h5 id="平均时间复杂度："><a href="#平均时间复杂度：" class="headerlink" title="平均时间复杂度："></a>平均时间复杂度：</h5><p>通过快速排序的定义我们可以自然的得到任意两个元素最多比较1次。</p>
-<p>我们令t为排序好的序列,即t=sort(p),</p>
-<p>定义随机变量$Y(n)$表示大小为n的数组再快速排序中所需要做的比较的次数</p>
-<p>再定义随机变量：<br>$$<br>X_{i,j} =<br>\begin{cases}<br>1 \quad if\;t_i\,and\,t_j\,are\,compared\,by\,quicksort\\<br>0 \quad otherwise<br>\end{cases}<br>$$<br>则<br>$$<br>Y(n)\le\sum_{i=1}^{n-1}\sum_{j=i+1}^{n}X_{i,j}<br>$$<br>由期望的线性可加性<br>$$<br>E[Y(n)]\le\sum_{i=1}^{n-1}\sum_{j=i+1}^{n}E[X_{i,j}]<br>$$<br>又由于X_{i,j}是一个indicator random variable, 则有　<br>$$<br>E[X_{i,j}] = P[X_{i,j}=1]<br>$$<br>又我们可以得到在序列中，两个元素相互比较当且仅当${t_i,t_{i+1},…t_j}$ 中$t_i$或者$t_j$ 被选中作为pivot。<br>$$<br>P[X_{i,j}=1] = \frac{2}{j-i+1}<br>$$<br>则可得<br>$$<br>\begin{aligned}<br>E[Y(n)]&amp;\le\sum_{i=1}^{n-1}\sum_{j=i+1}^{n} \frac{2}{j-i+1}\\<br>    &amp;= \sum_{i=1}^{n-1}\sum_{k=2}^{n-i+1}\frac{2}{k}\\<br>    &amp;\le 2n\sum_{i=1}^{n-1}H_n\\<br>    &amp;=2nH(n) \in O(nlogn)<br>\end{aligned}<br>$$</p>
+        <p>​    首先明确一些概念，对象(object)在C/C++中指的是执行环境中的一块儿存储区域(a region of storage)，该存储区域中的内容代表(represent)了该对象的值(value)。我们这里提到的“代表 ”，是说对于一个对象，当我们取出(fetch)它的值时，我们需要一定的类型(type)来引用它。使用不同的类型，对同一对象中的内容的解释可能会得到不同的值。变量(variable)则是一种声明，通过声明，将一个名字(name)和一个对象对应起来，使用这个名字时，表示了我们对该对象进行了某种操作。</p>
+<p>​    而左值(lvalue)是指拥有可识别位置(identifiable memory location)的对象(比如地址)，而不是左值的即是右值(rvalue)。</p>
+<h4 id="基本例子"><a href="#基本例子" class="headerlink" title="基本例子"></a>基本例子</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> var;</span><br><span class="line">var = <span class="number">4</span>;</span><br></pre></td></tr></table></figure>
+<p>赋值操作需要左值来作为左操作数(left operand)，而var有可识别位置，因此上面的赋值是成立的。同理，下面的式子是错误的。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">4</span> = var;       <span class="comment">// ERROR!</span></span><br><span class="line">(var + <span class="number">1</span>) = <span class="number">4</span>; <span class="comment">// ERROR!</span></span><br></pre></td></tr></table></figure>
+<p>一般来说，能出现在赋值号左边的表达式都是”左值”，非const的变量都是左值，函数调用时的返回值如果不是引用，那么该函数调用就是右值的。</p>
+<h4 id="左值和右值的转换"><a href="#左值和右值的转换" class="headerlink" title="左值和右值的转换"></a>左值和右值的转换</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">1</span>;     <span class="comment">// a is an lvalue</span></span><br><span class="line"><span class="keyword">int</span> b = <span class="number">2</span>;     <span class="comment">// b is an lvalue</span></span><br><span class="line"><span class="keyword">int</span> c = a + b; <span class="comment">// + needs rvalues, so a and b are converted to rvalues</span></span><br><span class="line">               <span class="comment">// and an rvalue is returned</span></span><br></pre></td></tr></table></figure>
+<p>在进行相加操作时，左值隐式转换为了右值，事实上，所有非(arrays, functions or of incomplete types)都可以转换为右值，但右值无法隐式转换为左值，但右值可以通过一些显式的手段转换为左值，比如，一元操作符 $*$ (dereference) 接受一个右值的输入但返回一个左值，</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> arr[] = &#123;<span class="number">1</span>, <span class="number">2</span>&#125;;</span><br><span class="line"><span class="keyword">int</span>* p = &amp;arr[<span class="number">0</span>];</span><br><span class="line">*(p + <span class="number">1</span>) = <span class="number">10</span>;   <span class="comment">// OK: p + 1 is an rvalue, but *(p + 1) is an lvalue</span></span><br></pre></td></tr></table></figure>
+<p>相反的，一元操作符 &amp; (reference) 接收左值并返回一个右值。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> var = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span>* bad_addr = &amp;(var + <span class="number">1</span>); <span class="comment">// ERROR: lvalue required as unary '&amp;' operand</span></span><br><span class="line"><span class="keyword">int</span>* addr = &amp;var;           <span class="comment">// OK: var is an lvalue</span></span><br><span class="line">&amp;var = <span class="number">40</span>;                  <span class="comment">// ERROR: lvalue required as left operand</span></span><br><span class="line">                            <span class="comment">// of assignment</span></span><br></pre></td></tr></table></figure>
+<p>非const左值引用无法被右值初始化，因为没有从右值到左值的隐式转化。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">string</span>&amp; sref = <span class="built_in">std</span>::<span class="built_in">string</span>();  <span class="comment">// ERROR: invalid initialization of</span></span><br><span class="line">                                    <span class="comment">// non-const reference of type</span></span><br><span class="line">                                    <span class="comment">// 'std::string&amp;' from an rvalue of</span></span><br><span class="line">                                    <span class="comment">// type 'std::string'</span></span><br></pre></td></tr></table></figure>
+<p>const左值引用可以被右值初始化，C++中函数用constant references接收参数，避免了没有意义的拷贝和构造临时对象。</p>
+<h4 id="关于数组："><a href="#关于数组：" class="headerlink" title="关于数组："></a>关于数组：</h4><p>​    在需要右值的场合，数组名会隐式转换为其首个元素的地址，不发生这种退化的情况有几个场合：一是声明时；一是用作sizeof的操作数时；一是用作&amp;取址运算的操作数时。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a[<span class="number">3</span>]=&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;; </span><br><span class="line"><span class="keyword">int</span> b[<span class="number">3</span>]; </span><br><span class="line">b=a; <span class="comment">//error. b converted to int* (rvalue): array degration. </span></span><br><span class="line"><span class="keyword">int</span>* p=a; <span class="comment">//array degration: a converted to an rvalue of int* </span></span><br><span class="line"><span class="keyword">sizeof</span>(a); <span class="comment">// no degration. </span></span><br><span class="line">&amp;a; <span class="comment">//no degration.</span></span><br></pre></td></tr></table></figure>
+<p>​    C++中，数组还有其他场合不发生退化，比如作为引用的initialize。</p>
 <hr>
 <h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><ul>
-<li><a href="https://www.zhihu.com/question/22393997/answer/66651936" target="_blank" rel="noopener">如何证明快速排序法的平均复杂度为 O(nlogn)?</a></li>
-<li><a href="https://drive.google.com/file/d/0B4z2gzEmkDDCa0tNQWMtNTk1Z2s/view" target="_blank" rel="noopener">Randomized Algorithms</a></li>
+<li><a href="https://web.archive.org/web/20160112040816/http://eli.thegreenplace.net/2011/12/15/understanding-lvalues-and-rvalues-in-c-and-c/" target="_blank" rel="noopener">Understanding lvalues and rvalues in C and C++</a></li>
+<li><a href="https://www.zhihu.com/question/25814721/answer/31648501" target="_blank" rel="noopener">如何正确并合理的使用数组，指针*和取地址符&amp;?</a></li>
+<li><a href="http://www.newsmth.net/nForum/#!article/CPlusPlus/179727?p=1#a0" target="_blank" rel="noopener">C/C++的左值</a></li>
 </ul>
 
       
@@ -404,7 +404,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/algorithm/" rel="tag"># algorithm</a>
+            <a href="/tags/C/" rel="tag"># C++</a>
           
         </div>
       
@@ -417,8 +417,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/18/Adaboost/" rel="next" title="Adaboost">
-                <i class="fa fa-chevron-left"></i> Adaboost
+              <a href="/2018/05/27/xgboost调参/" rel="next" title="xboost调参">
+                <i class="fa fa-chevron-left"></i> xboost调参
               </a>
             
           </div>
@@ -426,10 +426,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/05/21/GBDT/" rel="prev" title="Xgboost">
-                Xgboost <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -562,7 +558,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#快速排序："><span class="nav-number">1.</span> <span class="nav-text">快速排序：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#平均时间复杂度："><span class="nav-number">1.0.1.</span> <span class="nav-text">平均时间复杂度：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参考"><span class="nav-number">1.1.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本例子"><span class="nav-number">1.</span> <span class="nav-text">基本例子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#左值和右值的转换"><span class="nav-number">2.</span> <span class="nav-text">左值和右值的转换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于数组："><span class="nav-number">3.</span> <span class="nav-text">关于数组：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>

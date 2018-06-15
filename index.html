@@ -277,7 +277,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/22/test/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/15/C++左值和右值/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Andong Lee">
@@ -296,8 +296,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/22/test/" itemprop="url">
-                  test
+                <a class="post-title-link" href="/2018/06/15/C++左值和右值/" itemprop="url">
+                  C++左值和右值
                 </a>
               
             
@@ -323,7 +323,7 @@
                 
               
 
-              <time title="Created: 2018-05-22 09:35:06 / Modified: 09:59:16" itemprop="dateCreated datePublished" datetime="2018-05-22T09:35:06+08:00">2018-05-22</time>
+              <time title="Created: 2018-06-15 16:30:06 / Modified: 17:05:16" itemprop="dateCreated datePublished" datetime="2018-06-15T16:30:06+08:00">2018-06-15</time>
             
 
             
@@ -363,7 +363,234 @@
       
         
           
+            <p>​    首先明确一些概念，对象(object)在C/C++中指的是执行环境中的一块儿存储区域(a region of storage)，该存储区域中的内容代表(represent)了该对象的值(value)。我们这里提到的“代表 ”，是说对于一个对象，当我们取出(fetch)它的值时，我们需要一定的类型(type)来引用它。使用不同的类型，对同一对象中的内容的解释可能会得到不同的值。变量(variable)则是一种声明，通过声明，将一个名字(name)和一个对象对应起来，使用这个名字时，表示了我们对该对象进行了某种操作。</p>
+<p>​    而左值(lvalue)是指拥有可识别位置(identifiable memory location)的对象(比如地址)，而不是左值的即是右值(rvalue)。</p>
+<h4 id="基本例子"><a href="#基本例子" class="headerlink" title="基本例子"></a>基本例子</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> var;</span><br><span class="line">var = <span class="number">4</span>;</span><br></pre></td></tr></table></figure>
+<p>赋值操作需要左值来作为左操作数(left operand)，而var有可识别位置，因此上面的赋值是成立的。同理，下面的式子是错误的。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">4</span> = var;       <span class="comment">// ERROR!</span></span><br><span class="line">(var + <span class="number">1</span>) = <span class="number">4</span>; <span class="comment">// ERROR!</span></span><br></pre></td></tr></table></figure>
+<p>一般来说，能出现在赋值号左边的表达式都是”左值”，非const的变量都是左值，函数调用时的返回值如果不是引用，那么该函数调用就是右值的。</p>
+<h4 id="左值和右值的转换"><a href="#左值和右值的转换" class="headerlink" title="左值和右值的转换"></a>左值和右值的转换</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">1</span>;     <span class="comment">// a is an lvalue</span></span><br><span class="line"><span class="keyword">int</span> b = <span class="number">2</span>;     <span class="comment">// b is an lvalue</span></span><br><span class="line"><span class="keyword">int</span> c = a + b; <span class="comment">// + needs rvalues, so a and b are converted to rvalues</span></span><br><span class="line">               <span class="comment">// and an rvalue is returned</span></span><br></pre></td></tr></table></figure>
+<p>在进行相加操作时，左值隐式转换为了右值，事实上，所有非(arrays, functions or of incomplete types)都可以转换为右值，但右值无法隐式转换为左值，但右值可以通过一些显式的手段转换为左值，比如，一元操作符 $*$ (dereference) 接受一个右值的输入但返回一个左值，</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> arr[] = &#123;<span class="number">1</span>, <span class="number">2</span>&#125;;</span><br><span class="line"><span class="keyword">int</span>* p = &amp;arr[<span class="number">0</span>];</span><br><span class="line">*(p + <span class="number">1</span>) = <span class="number">10</span>;   <span class="comment">// OK: p + 1 is an rvalue, but *(p + 1) is an lvalue</span></span><br></pre></td></tr></table></figure>
+<p>相反的，一元操作符 &amp; (reference) 接收左值并返回一个右值。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> var = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span>* bad_addr = &amp;(var + <span class="number">1</span>); <span class="comment">// ERROR: lvalue required as unary '&amp;' operand</span></span><br><span class="line"><span class="keyword">int</span>* addr = &amp;var;           <span class="comment">// OK: var is an lvalue</span></span><br><span class="line">&amp;var = <span class="number">40</span>;                  <span class="comment">// ERROR: lvalue required as left operand</span></span><br><span class="line">                            <span class="comment">// of assignment</span></span><br></pre></td></tr></table></figure>
+<p>非const左值引用无法被右值初始化，因为没有从右值到左值的隐式转化。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">string</span>&amp; sref = <span class="built_in">std</span>::<span class="built_in">string</span>();  <span class="comment">// ERROR: invalid initialization of</span></span><br><span class="line">                                    <span class="comment">// non-const reference of type</span></span><br><span class="line">                                    <span class="comment">// 'std::string&amp;' from an rvalue of</span></span><br><span class="line">                                    <span class="comment">// type 'std::string'</span></span><br></pre></td></tr></table></figure>
+<p>const左值引用可以被右值初始化，C++中函数用constant references接收参数，避免了没有意义的拷贝和构造临时对象。</p>
+<h4 id="关于数组："><a href="#关于数组：" class="headerlink" title="关于数组："></a>关于数组：</h4><p>​    在需要右值的场合，数组名会隐式转换为其首个元素的地址，不发生这种退化的情况有几个场合：一是声明时；一是用作sizeof的操作数时；一是用作&amp;取址运算的操作数时。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a[<span class="number">3</span>]=&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;; </span><br><span class="line"><span class="keyword">int</span> b[<span class="number">3</span>]; </span><br><span class="line">b=a; <span class="comment">//error. b converted to int* (rvalue): array degration. </span></span><br><span class="line"><span class="keyword">int</span>* p=a; <span class="comment">//array degration: a converted to an rvalue of int* </span></span><br><span class="line"><span class="keyword">sizeof</span>(a); <span class="comment">// no degration. </span></span><br><span class="line">&amp;a; <span class="comment">//no degration.</span></span><br></pre></td></tr></table></figure>
+<p>​    C++中，数组还有其他场合不发生退化，比如作为引用的initialize。</p>
+<hr>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><ul>
+<li><a href="https://web.archive.org/web/20160112040816/http://eli.thegreenplace.net/2011/12/15/understanding-lvalues-and-rvalues-in-c-and-c/" target="_blank" rel="noopener">Understanding lvalues and rvalues in C and C++</a></li>
+<li><a href="https://www.zhihu.com/question/25814721/answer/31648501" target="_blank" rel="noopener">如何正确并合理的使用数组，指针*和取地址符&amp;?</a></li>
+<li><a href="http://www.newsmth.net/nForum/#!article/CPlusPlus/179727?p=1#a0" target="_blank" rel="noopener">C/C++的左值</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/27/xgboost调参/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Andong Lee">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andong's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/27/xgboost调参/" itemprop="url">
+                  xboost调参
+                </a>
+              
             
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-05-27 16:24:01" itemprop="dateCreated datePublished" datetime="2018-05-27T16:24:01+08:00">2018-05-27</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-06-15 18:07:12" itemprop="dateModified" datetime="2018-06-15T18:07:12+08:00">2018-06-15</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ol>
+<li><h3 id="General-Parameters"><a href="#General-Parameters" class="headerlink" title="General Parameters:"></a><strong>General Parameters:</strong></h3><ol>
+<li><strong>booster [default=gbtree]:</strong>  选择每一个iteration所使用的模型，有两个选项<ul>
+<li>gbtree: tree-based models</li>
+<li>gblinear: linear models</li>
+</ul>
+</li>
+<li><strong>silent [default=0]：</strong>  运行的过程中是否打印信息</li>
+<li><strong>nthread [default to maximum number of threads available if not set]</strong> </li>
+</ol>
+</li>
+<li><h3 id="Booster-Parameters-这里主要指的是gbtree的选项，gblinear用的很少"><a href="#Booster-Parameters-这里主要指的是gbtree的选项，gblinear用的很少" class="headerlink" title="Booster Parameters: 这里主要指的是gbtree的选项，gblinear用的很少"></a><strong>Booster Parameters:</strong> 这里主要指的是gbtree的选项，gblinear用的很少</h3><ol>
+<li><strong>eta [default=0.3]：</strong>给予每一个模型的权重，可以使得模型更坚固，但也会需要更多的模型，产生额外的开销。一般值的设定为0.01-0.2</li>
+<li><strong>min_child_weight [default=1]：</strong> 类似于gbm的<strong>min_samples_leaf</strong>选项，但是限定的是子结点中最小的样本权重的和，同样的，取较高的值可以防止过拟合(阻止模型挖掘属于特定数据的特定特征)，但太高了会造成欠拟合，应该用CV调整。</li>
+<li><strong>max_depth [default=6]：</strong> 最大树深，可用来控制过拟合，应该用CV调整，一般取值在3-10之间。</li>
+<li><strong>max_leaf_nodes:</strong> 树所能拥有的最大的叶子结点数目，如果该项定义，会忽略掉<strong>max_depth</strong> 的值。</li>
+<li><strong>gamma [default=0]:</strong> 节点分裂所需的最小的增益值。使模型更加conservative。</li>
+<li><strong>subsample [default=1]：</strong> 喂给每一颗树的数据集比例，值取得小使得模型更加坚固，防止过拟合，但太小了会造成欠拟合，一般取0.5-1。</li>
+<li><strong>colsample_bytree [default=1]：</strong> 分裂结点时所用的特征数目，一般取0.5-1。值取得过高可能会导致过拟合，但也取决于不同的样本。</li>
+<li><strong>lambda [default=1]:</strong> L2 regularization term的权重</li>
+<li><strong>alpha [default=0]:</strong>  L1 regularization term的权重，一般用在数据的维度非常高的时候，降低运行速度。</li>
+<li><strong>scale_pos_weight [default=1]:</strong>  用于不平衡的数据，控制数据的比例，一个典型的值的设定为 sum(negative cases) / sum(positive cases) </li>
+</ol>
+</li>
+<li><h3 id="Learning-Task-Parameters"><a href="#Learning-Task-Parameters" class="headerlink" title="Learning Task Parameters"></a>Learning Task Parameters</h3><ol>
+<li><p><strong>objective [default=reg:linear]:</strong> 损失函数</p>
+<ul>
+<li><p><strong>binary:logistic</strong> –logistic regression for binary classification, returns predicted probability (not class)</p>
+</li>
+<li><p><strong>multi:softmax</strong> –multiclass classification using the softmax objective, returns predicted class (not probabilities)，使用时需要设置num_class的值。</p>
+</li>
+<li><p><strong>multi:softprob</strong> –same as softmax, but returns predicted probability of each data point belonging to each class.</p>
+</li>
+</ul>
+</li>
+<li><strong>eval_metric [ default according to objective ]:</strong> The metric to be used for validation data. 默认的值为回归问题使用rmse，分类问题使用error。典型的值设定有；<ul>
+<li><strong>rmse</strong> – root mean square error</li>
+<li><strong>mae</strong> – mean absolute error</li>
+<li><strong>logloss</strong> – negative log-likelihood</li>
+<li><strong>error</strong> – Binary classification error rate (0.5 threshold)</li>
+<li><strong>merror</strong> – Multiclass classification error rate</li>
+<li><strong>mlogloss</strong> – Multiclass logloss</li>
+<li><strong>auc:</strong> Area under the curve</li>
+</ul>
+</li>
+<li><strong>seed [default=0]:</strong> 用来重复实验以及调参。</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><ul>
+<li><a href="https://www.analyticsvidhya.com/blog/2016/03/complete-guide-parameter-tuning-xgboost-with-codes-python/" target="_blank" rel="noopener">Complete Guide to Parameter Tuning in XGBoost</a></li>
+</ul>
+
           
         
       
@@ -436,7 +663,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 <a class="post-title-link" href="/2018/05/21/GBDT/" itemprop="url">
-                  GBDT
+                  Xgboost
                 </a>
               
             
@@ -462,7 +689,7 @@
                 
               
 
-              <time title="Created: 2018-05-21 16:22:37" itemprop="dateCreated datePublished" datetime="2018-05-21T16:22:37+08:00">2018-05-21</time>
+              <time title="Created: 2018-05-21 09:35:06" itemprop="dateCreated datePublished" datetime="2018-05-21T09:35:06+08:00">2018-05-21</time>
             
 
             
@@ -479,7 +706,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-05-22 10:30:38" itemprop="dateModified" datetime="2018-05-22T10:30:38+08:00">2018-05-22</time>
+                <time title="Modified: 2018-06-15 19:01:34" itemprop="dateModified" datetime="2018-06-15T19:01:34+08:00">2018-06-15</time>
               
             
           </span>
@@ -514,21 +741,18 @@
       
         
           
-            <h2 id="Gradient-Boosting-Decision-Tree"><a href="#Gradient-Boosting-Decision-Tree" class="headerlink" title="Gradient Boosting Decision Tree"></a>Gradient Boosting Decision Tree</h2><hr>
-<h3 id="GBDT综述"><a href="#GBDT综述" class="headerlink" title="GBDT综述"></a>GBDT综述</h3><h4 id="Model："><a href="#Model：" class="headerlink" title="Model："></a>Model：</h4><p>假设我们有k棵回归树</p>
-<p>$$<br>H(x) = \sum_{k=1}^{K}{f_k(x_i),}   \quad f_k\in F<br>$$</p>
+            <h2 id="Xgboost"><a href="#Xgboost" class="headerlink" title="Xgboost"></a>Xgboost</h2><hr>
+<h4 id="Model："><a href="#Model：" class="headerlink" title="Model："></a>Model：</h4><p>假设我们有k棵回归树<br>$$<br>H(x) = \sum_{k=1}^{K}{f_k(x_i),}   \quad f_k\in F<br>$$</p>
 <h4 id="Parameter"><a href="#Parameter" class="headerlink" title="Parameter:"></a>Parameter:</h4><p>每一个参数就就是一棵不同的回归树<br>$$<br>\Theta = {f_1, f_2, … f_T}<br>$$</p>
 <h4 id="Object-function"><a href="#Object-function" class="headerlink" title="Object function:"></a>Object function:</h4><p>前一部分为损失函数，后一部分为正则项。<br>$$<br>Obj = \sum_{i=1}^nl(y_i,\hat y_i)+\sum_{k=1}^K \Omega(f_k)<br>$$</p>
 <hr>
-<p>算法流程</p>
-<p><img src="https://github.com/Leeandong/markdown_pictures/blob/master/GBDT算法.png?raw=true" alt="image-20180521163547532"></p>
-<hr>
 <h3 id="如何进行训练"><a href="#如何进行训练" class="headerlink" title="如何进行训练"></a>如何进行训练</h3><p>当训练到第t次时，<br>$$<br>Obj^{(t)} = \sum_{i=1}^nl(y_i,\hat y_i^{(t-1)}+f_t(x))+\Omega(f_t)+constant<br>$$</p>
-<p>令$g_i = \frac{\partial(y_i,\hat y_i)}{\partial\hat y_i}|_{\hat y_i = \hat y^{(t-1)}}​$ , $h_i = \frac{\partial^2(y_i,\hat y_i)}{\partial\hat y_i^2}|_{\hat y_i = \hat y^{(t-1)}}​$</p>
+<p>令$g_i = \frac{\partial(y_i,\hat y_i)}{\partial\hat y_i}|_{\hat y_i = \hat y^{(t-1)}}$ , $h_i = \frac{\partial^2(y_i,\hat y_i)}{\partial\hat y_i^2}|_{\hat y_i = \hat y^{(t-1)}}$</p>
 <p>则对目标函数做泰勒展开可以得到<br>$$<br>\begin{aligned}<br>Obj^{(t)} &amp;\approx \sum_{i=1}^n \left(l (y_i,\hat y_i^{(t-1)})+ g_if_t(x_i)+\frac{1}{2}h_if_t^2(x_i) \right)+\Omega(f_t)+constant\\<br>&amp;= \sum_{i=1}^n \left( g_if_t(x_i)+\frac{1}{2}h_if_t^2(x_i)  \right)+\Omega(f_t)+constant\\<br>\end{aligned}<br>$$<br>可以看到第t步的目标函数依赖于$g_i$和$h_i$函数，以及$\hat y^{(t-1)}$的值。</p>
 <p>定义回归树函数为：<br>$$<br>f_t(x)=w_{q(x)}  \quad w\in R^T, q: R^d \to {1,2,…,T}<br>$$<br>再定义回归树的惩罚函数为：<br>$$<br>\Omega(f_t) =\gamma T + \frac{1}{2}\lambda \sum_{j=1}^T{w_j^2}<br>$$</p>
 <p>此时将回归树模型代入上述的目标函数中，并令$I_j = { x_i | q(x_i) = j }$, 再按照叶子结点来将输入分组，则可以得到<br>$$<br>\begin{aligned}<br>Obj^{(t)} &amp;\approx \sum_{i=1}^n \left( g_if_t(x_i)+\frac{1}{2}h_if_t^2(x_i)  \right)+\Omega(f_t)\\<br>&amp;=\sum_{i=1}^n \left( g_iw_q(x_i) + \frac{1}{2}h_iw_q^2(x_i)  \right)+ \gamma T + \frac{1}{2}\lambda \sum_{j=1}^T{w_j^2} \\<br>&amp;= \sum_{j=1}^T \left(   (\sum_{i\in I_j} {g_i})w_j +\frac{1}{2} (\sum_{i\in I_j} {h_i+\lambda})w_j^2  \right) + \gamma T<br>\end{aligned}<br>$$<br>再令$G_j = \sum_{i \in I_j } g_i$, $H_j = \sum_{i \in I_j } h_i$<br>$$<br>\begin{aligned}<br>Obj^{(t)}  &amp;= \sum_{j=1}^T \left(   (\sum_{i\in I_j} {g_i})w_j +\frac{1}{2} (\sum_{i\in I_j} {h_i+\lambda})w_j^2  \right) + \gamma T \\<br>&amp; = \sum_{j=1}^T \left(   G_jw_j +\frac{1}{2} (H_j+\lambda)w_j^2  \right) + \gamma T \\<br>\end{aligned}<br>$$<br>则当树的结构确定的时候，最优的叶子权重值以及最优的目标函数值就为<br>$$<br>w^*_j = -\frac{G_j}{H_j+\lambda} \qquad<br>Obj =-\frac{1}{2}\sum_{j=1}^{T}\frac{G_j^2}{H_j+\lambda} + \gamma T<br>$$</p>
-<p>这样我们就确定了对于单棵树的搜索算法</p>
+<hr>
+<h3 id="单棵树搜索算法"><a href="#单棵树搜索算法" class="headerlink" title="单棵树搜索算法"></a>单棵树搜索算法</h3><h4 id="精确建树"><a href="#精确建树" class="headerlink" title="精确建树"></a>精确建树</h4><p>这样我们就确定了对于单棵树的搜索算法</p>
 <p>1.枚举出所有树的可能性</p>
 <p>2.计算出对应每种树的目标函数，选择最大的作为此次构造的树的结构</p>
 <p>3.在选取的树的结构下,计算出每个叶子结点的最优权值</p>
@@ -537,11 +761,26 @@
 <p>1.初始深度为0</p>
 <p>2.对每一个叶节点，判断是否会分裂<br>$$<br>Gain = \frac{1}{2}\left[  \frac{G_L^2}{H_L+\lambda}+\frac{G_R^2}{H_R+\lambda}-<br>\frac{G_R^2+G_L^2}{H_L+H_R+\lambda} - \gamma       \right]<br>$$<br>依次扫描所有的属性，对同一个属性，从左向右的扫描所有的点，从而选出gain最高的点，如果gain&gt;threshold，则进行分裂。</p>
 <p>分裂算法如下：</p>
-<p><img src="https://github.com/Leeandong/markdown_pictures/blob/master/GBDT节点分裂算法.png?raw=true" alt="image-20180521160739943"></p>
-<p>算法的时间复杂度为 O(ndKlogn)</p>
+<p><img src="https://github.com/Leeandong/markdown_pictures/blob/master/Exact%20Greedy%20Algorithm%20for%20Split%20Finding.png?raw=true" alt=""></p>
+<p>其中m为当前叶子结点的属性数目，$X_{jk}$ 中$j$ 代表当前分裂的位置，k代表属性值。 外层循环是对属性的遍历，内层节点是对分裂位置的遍历。算法的时间复杂度为 O(ndKlogn)。</p>
+<h4 id="近似建树"><a href="#近似建树" class="headerlink" title="近似建树"></a>近似建树</h4><p>上述算法的时间复杂度过高，我们可以采用近似的方法，将样本先分成多少个小区间，再对每个区间进行操作，从而节省工作量，那么分割位点我们该如何选取呢？分割的结果自然是越均匀越好，这样才能得到一个有效的近似。我们将目标函数整理成以下的形式：<br>$$<br>Obj^{(t)} = \sum_{i=1}^n \frac{1}{2} h_i(f_t(x_i)- \frac{g_i}{h_i})^2+\Omega(f_t)+constant<br>$$<br>可以看出$h_i$有对loss有加权作用，因此我们采用$h_i$作为权重进行分割。</p>
+<p>这样就得到了改进后的分裂算法</p>
+<p><img src="https://github.com/Leeandong/markdown_pictures/blob/master/Approximate%20Algorithm%20for%20Split%20Finding.png?raw=true" alt=""></p>
+<p>可以看到有全局和局部两种类型的分位点，其中全局分位点是指在建树之前就已经选取好所有的分位点，而局部分位点是在每一个结点分裂过程中选取分位点，可以对深的树有良好的效果，实验中发现，全局k分位点取20和局部k分位点取3，得到了近似的效果。</p>
 <hr>
-<p>[1].Introduction to Boosted Trees            Tiani Chen </p>
-<p>[2].</p>
+<h4 id="稀疏样本的处理"><a href="#稀疏样本的处理" class="headerlink" title="稀疏样本的处理"></a>稀疏样本的处理</h4><p>​    实际处理中，数据有很大可能是稀疏的，如果我们对于稀疏值有处理的方式，能够极大的提高我们算法运行的速度，xgboost中如果遇到了缺失的值，这个样本会被分入一个默认的方向。</p>
+<p><img src="https://github.com/Leeandong/markdown_pictures/blob/master/Tree%20structure%20with%20default%20directions.png?raw=true" alt=""></p>
+<p>而为了完成default的操作，先假设missing value在右子树上，求得此时的最大gain，再假设missing value在左子树上，求得此时最大gain，比较下来哪种情况最大，则对应的假设方向就是default的方向。这里的话貌似又是一个可以并行计算的点。<br>具体的算法如下：</p>
+<p><img src="https://github.com/Leeandong/markdown_pictures/blob/master/%20Sparsity-aware%20Split%20Finding.png?raw=true" alt=""></p>
+<p>后面还有一些硬件方面的优化，待续吧emmmm。</p>
+<hr>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><ul>
+<li><a href="https://homes.cs.washington.edu/~tqchen/pdf/BoostedTree.pdf" target="_blank" rel="noopener">Introduction to Boosted Trees </a></li>
+<li><a href="http://www.kdd.org/kdd2016/papers/files/rfp0697-chenAemb.pdf" target="_blank" rel="noopener">XGBoost: A Scalable Tree Boosting System</a></li>
+<li><a href="http://wepon.me/files/gbdt.pdf" target="_blank" rel="noopener">GBDT算法原理与系统设计简介 </a></li>
+<li><a href="http://www.pengfoo.com/post/machine-learning/2017-03-03" target="_blank" rel="noopener">XGBoost all in one</a></li>
+<li><a href="http://wepon.me/2016/05/07/XGBoost浅入浅出/" target="_blank" rel="noopener">XGBoost浅入浅出</a></li>
+</ul>
 
           
         
@@ -658,7 +897,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-05-22 10:01:30" itemprop="dateModified" datetime="2018-05-22T10:01:30+08:00">2018-05-22</time>
+                <time title="Modified: 2018-06-15 17:16:08" itemprop="dateModified" datetime="2018-06-15T17:16:08+08:00">2018-06-15</time>
               
             
           </span>
@@ -700,7 +939,10 @@
 <p>定义随机变量$Y(n)$表示大小为n的数组再快速排序中所需要做的比较的次数</p>
 <p>再定义随机变量：<br>$$<br>X_{i,j} =<br>\begin{cases}<br>1 \quad if\;t_i\,and\,t_j\,are\,compared\,by\,quicksort\\<br>0 \quad otherwise<br>\end{cases}<br>$$<br>则<br>$$<br>Y(n)\le\sum_{i=1}^{n-1}\sum_{j=i+1}^{n}X_{i,j}<br>$$<br>由期望的线性可加性<br>$$<br>E[Y(n)]\le\sum_{i=1}^{n-1}\sum_{j=i+1}^{n}E[X_{i,j}]<br>$$<br>又由于X_{i,j}是一个indicator random variable, 则有　<br>$$<br>E[X_{i,j}] = P[X_{i,j}=1]<br>$$<br>又我们可以得到在序列中，两个元素相互比较当且仅当${t_i,t_{i+1},…t_j}$ 中$t_i$或者$t_j$ 被选中作为pivot。<br>$$<br>P[X_{i,j}=1] = \frac{2}{j-i+1}<br>$$<br>则可得<br>$$<br>\begin{aligned}<br>E[Y(n)]&amp;\le\sum_{i=1}^{n-1}\sum_{j=i+1}^{n} \frac{2}{j-i+1}\\<br>    &amp;= \sum_{i=1}^{n-1}\sum_{k=2}^{n-i+1}\frac{2}{k}\\<br>    &amp;\le 2n\sum_{i=1}^{n-1}H_n\\<br>    &amp;=2nH(n) \in O(nlogn)<br>\end{aligned}<br>$$</p>
 <hr>
-<p>[1] </p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><ul>
+<li><a href="https://www.zhihu.com/question/22393997/answer/66651936" target="_blank" rel="noopener">如何证明快速排序法的平均复杂度为 O(nlogn)?</a></li>
+<li><a href="https://drive.google.com/file/d/0B4z2gzEmkDDCa0tNQWMtNTk1Z2s/view" target="_blank" rel="noopener">Randomized Algorithms</a></li>
+</ul>
 
           
         
@@ -800,12 +1042,24 @@
                 
               
 
-              <time title="Created: 2018-05-18 20:08:47 / Modified: 20:45:28" itemprop="dateCreated datePublished" datetime="2018-05-18T20:08:47+08:00">2018-05-18</time>
+              <time title="Created: 2018-05-18 10:12:23" itemprop="dateCreated datePublished" datetime="2018-05-18T10:12:23+08:00">2018-05-18</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-06-15 18:58:42" itemprop="dateModified" datetime="2018-06-15T18:58:42+08:00">2018-06-15</time>
               
             
           </span>
@@ -864,6 +1118,10 @@
 <p>​    利用数据样本的扰动，即每次利用前面分类器的结果，对数据的分布进行修改，从而利用不同的数据子集训练得到不同的个体学习器。这种方法对于不稳定的基学习器(即训练样本的变化会大幅影响结果)很有效，如决策树，神经网络等。</p>
 <p>2.如何将弱分类器组合到一起？</p>
 <p>​    利用其误差代入权重函数得到单个分类器的权重，最后对各个分类器的结果进行线性加权组合得到结果。</p>
+<hr>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><ul>
+<li>周志华《机器学习》</li>
+</ul>
 
           
         
@@ -917,7 +1175,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/14/机器学习评估指标/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/15/机器学习评估指标/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Andong Lee">
@@ -936,8 +1194,8 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/14/机器学习评估指标/" itemprop="url">
-                  Untitled
+                <a class="post-title-link" href="/2018/05/15/机器学习评估指标/" itemprop="url">
+                  机器学习评估系统
                 </a>
               
             
@@ -963,12 +1221,24 @@
                 
               
 
-              <time title="Created: 2018-05-14 18:14:39 / Modified: 19:20:03" itemprop="dateCreated datePublished" datetime="2018-05-14T18:14:39+08:00">2018-05-14</time>
+              <time title="Created: 2018-05-15 14:32:12" itemprop="dateCreated datePublished" datetime="2018-05-15T14:32:12+08:00">2018-05-15</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-06-15 18:58:03" itemprop="dateModified" datetime="2018-06-15T18:58:03+08:00">2018-06-15</time>
               
             
           </span>
@@ -1035,11 +1305,6 @@
 <ul>
 <li><a href="https://blog.argcv.com/articles/1036.c" target="_blank" rel="noopener">准确率(Accuracy), 精确率(Precision), 召回率(Recall)和F1-Measure</a></li>
 </ul>
-<blockquote>
-<p><strong>Post author:</strong>  Andong Lee</p>
-<p><strong>Post link:</strong> <a href="https://jdhao.github.io/2018/5/14" target="_blank" rel="noopener">https://jdhao.github.io/2018/5/14</a></p>
-<p><strong>Copyright Notice:</strong>  All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> unless stating additionally.</p>
-</blockquote>
 
           
         
@@ -1281,7 +1546,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -1300,7 +1565,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">2</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>
@@ -1505,6 +1774,8 @@
 
   
   
+    
+      
     
       
     
