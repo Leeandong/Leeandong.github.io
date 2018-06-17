@@ -277,6 +277,163 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/17/C-右值引用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Andong Lee">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andong's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/17/C-右值引用/" itemprop="url">
+                  C++右值引用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-06-17 16:10:43 / Modified: 17:28:32" itemprop="dateCreated datePublished" datetime="2018-06-17T16:10:43+08:00">2018-06-17</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="本篇我们讨论C-11-引入的右值引用。"><a href="#本篇我们讨论C-11-引入的右值引用。" class="headerlink" title="本篇我们讨论C++ 11 引入的右值引用。"></a>本篇我们讨论C++ 11 引入的右值引用。</h3><p>注：g++编译器做了很多优化，为了分析原理，本篇的测试全部是在以下编译条件下进行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g++ -fno-elide-constructors  -std=c++11 test.cpp</span><br></pre></td></tr></table></figure>
+<p>考虑这样一个简单的例子</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">String</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">char</span>* str;</span><br><span class="line">    String():str(<span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">1</span>])&#123;str[<span class="number">0</span>]=<span class="number">0</span>;&#125;</span><br><span class="line">    String(<span class="keyword">const</span> <span class="keyword">char</span>* s)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"constructor called"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        str = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="built_in">strlen</span>(s)+<span class="number">1</span>];</span><br><span class="line">        <span class="built_in">strcpy</span>(str,s);</span><br><span class="line">    &#125;</span><br><span class="line">    String(<span class="keyword">const</span> String&amp; s)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"copy constructor called"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        str = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="built_in">strlen</span>(s.str)+<span class="number">1</span>];</span><br><span class="line">        <span class="built_in">strcpy</span>(str,s.str);</span><br><span class="line">    &#125;</span><br><span class="line">    String &amp;<span class="keyword">operator</span> = (<span class="keyword">const</span> String&amp; s)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"copy operator = called"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">if</span>(str!= s.str)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">delete</span> []str;</span><br><span class="line">            str = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="built_in">strlen</span>(s.str)+<span class="number">1</span>];</span><br><span class="line">            <span class="built_in">strcpy</span>(str,s.str);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ~String() </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">delete</span> [] str;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>我们用右值来对r进行赋值</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String s = String(<span class="string">"hello"</span>);</span><br></pre></td></tr></table></figure>
+<p>题外：从这句话我们可以理解引用的好处，如果是单纯的按值传递，我们在形参的初始时就需要额外的进行构造函数的开销。为了能够接收右值，构造函数同时也必须采用const引用，因为没有从右值到左值的隐式转换。</p>
+<p>得到的结果为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">constructor called</span><br><span class="line">copy constructor called</span><br></pre></td></tr></table></figure>
+<p>可以看到在赋值过程中，执行了一次构造函数，一次拷贝构造函数，拷贝构造函数需要进行深拷贝，这就很浪费时间，而临时对象的内容在使用它语句结束之后也不会再被使用，如果我们直接把临时对象中的内容move给s,换句话说，直接令s中的str指向临时对象str所指向的地方，在将临时对象中的str指向一个新的非空的char数组，那不是无论我们赋值时得到的char数组有多长，我们总是有一个恒定的小的时间复杂度来进行深拷贝的工作，问题的关键就在于如何能去访问临时对象并进行修改，而C++11提供给我们的右值引用可以使我们能够实现这个想法。</p>
+<p>对String类再编写移动构造函数和移动赋值号。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">String(String &amp;&amp; s):str(s.str)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"move constructor called"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    s.str = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">1</span>];</span><br><span class="line">    s.str[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line">String &amp;<span class="keyword">operator</span> = (String&amp;&amp; s)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"move operator = called"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">if</span>(str!= s.str)</span><br><span class="line">    &#123;</span><br><span class="line">        str = s.str;</span><br><span class="line">        s.str = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">1</span>];</span><br><span class="line">        s.str[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>再运行</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String s = String(<span class="string">"hello"</span>);</span><br></pre></td></tr></table></figure>
+<p>此时的结果为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">constructor called</span><br><span class="line">move constructor called</span><br></pre></td></tr></table></figure>
+<p>可以看到我们直接把s的str指向了临时对象的str所指向的空间，再重新将str的空间赋为’\0’,便完成了s的初始化，简单粗暴而又符合自然的move的逻辑。</p>
+<p>右值引用所带给我们的move的逻辑在函数按值返回，接收右值表达式等有很多的便利，很多地方完全没有任何对右值引用的显式使用，却能带来性能的提升。这一部分具体可以参考知乎的回答<a href="https://www.zhihu.com/question/22111546/answer/30801982" target="_blank" rel="noopener">如何评价 C++11 的右值引用（Rvalue reference）特性</a>。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/15/C++左值和右值/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1546,7 +1703,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -1774,6 +1931,8 @@
 
   
   
+    
+      
     
       
     
