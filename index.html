@@ -277,6 +277,202 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/24/字符串乘方/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Andong Lee">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andong's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/24/字符串乘方/" itemprop="url">
+                  字符串乘方
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-07-24 21:18:00 / Modified: 21:46:43" itemprop="dateCreated datePublished" datetime="2018-07-24T21:18:00+08:00">2018-07-24</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="帮师姐刷面试题的时候遇到一个有意思的题，在POJ上找到了一个类似的题目-具体描述如下"><a href="#帮师姐刷面试题的时候遇到一个有意思的题，在POJ上找到了一个类似的题目-具体描述如下" class="headerlink" title="帮师姐刷面试题的时候遇到一个有意思的题，在POJ上找到了一个类似的题目,具体描述如下"></a>帮师姐刷面试题的时候遇到一个有意思的题，在POJ上找到了一个类似的<a href="http://bailian.openjudge.cn/practice/2406/" target="_blank" rel="noopener">题目</a>,具体描述如下</h3><h4 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h4><p>给定两个字符串a和b,我们定义a<em>b为他们的连接。例如，如果a=”abc” 而b=”def”， 则a</em>b=”abcdef”。 如果我们将连接考虑成乘法，一个非负整数的乘方将用一种通常的方式定义：a^0=””(空字符串)，a^(n+1)=a*(a^n)。</p>
+<h4 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h4><p>每一个测试样例是一行可打印的字符作为输入，用s表示。s的长度至少为1，且不会超过一百万。最后的测试样例后面将是一个点号作为一行。</p>
+<h4 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h4><p>对于每一个s，你应该打印最大的n，使得存在一个a，让s=a^n</p>
+<h4 id="样例输入"><a href="#样例输入" class="headerlink" title="样例输入"></a>样例输入</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">abcd</span><br><span class="line">aaaa</span><br><span class="line">ababab</span><br><span class="line">.</span><br></pre></td></tr></table></figure>
+<h4 id="样例输出"><a href="#样例输出" class="headerlink" title="样例输出"></a>样例输出</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">4</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
+<h4 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h4><p>本问题输入量很大，请用scanf代替cin，从而避免超时。</p>
+<p>这道题也就是求构成字符串的最小重复单位，灵感来自于KMP算法的next数组。</p>
+<p>KMP中next数组保存当前字符之前的子串的最大公共前缀后缀元素个数。</p>
+<p>比如 abcab 的最大公共前缀后缀元素个数为 2,  abca的最大公共前缀后缀元素个数为1。</p>
+<p>aaaaa的next数组如下所示：</p>
+<table>
+<thead>
+<tr>
+<th>a</th>
+<th>a</th>
+<th>a</th>
+<th>a</th>
+<th>a</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-1</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>a</th>
+<th>b</th>
+<th>a</th>
+<th>b</th>
+<th>a</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<p>可以发现一个很有趣的现象，当next数组遍历过重复的子串之后，next数组对应的值会逐个增大。这很好理解，因为已经过了第一个重复的子串之后，最大前缀后缀数组都是从第二个重复子串的开头开始的。所以我们有这样的一个思路，当我们求出next数组后，如果该字符串是由重复的子串构成的，那么该串的最大公共前缀后缀的个数应该是重复子串的整数倍。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxNum = <span class="number">1000000</span>;</span><br><span class="line"><span class="keyword">int</span> nExt[maxNum];</span><br><span class="line"><span class="built_in">string</span> str;</span><br><span class="line"><span class="keyword">int</span> len;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">GetNext</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">-1</span>;</span><br><span class="line">    nExt[<span class="number">0</span>] = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">while</span> (i &lt; len)&#123;</span><br><span class="line">        <span class="keyword">if</span>( j == <span class="number">-1</span> ||  str[i] == str[j])&#123;</span><br><span class="line">            ++i; ++j;</span><br><span class="line">            nExt[i] = j;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            j = nExt[j];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; str;</span><br><span class="line">        <span class="keyword">if</span>(str == <span class="string">"."</span>)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        len = <span class="keyword">static_cast</span>&lt;<span class="keyword">int</span>&gt; (str.length());</span><br><span class="line">        GetNext();</span><br><span class="line">        <span class="keyword">if</span> ((nExt[len] != <span class="number">0</span>) &amp;&amp; (nExt[len] % (len - nExt[len]) == <span class="number">0</span>))</span><br><span class="line">           <span class="built_in">cout</span> &lt;&lt; len/(len - nExt[len]) &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">           <span class="built_in">cout</span> &lt;&lt; <span class="string">"1\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们可以看到上面的求next数组的函数，求next数组的思路是怎么样的呢， next数组表示的含义是当前字符之前字符串的最大公共前缀后缀，求next[k]的值，就是要看str[next[k-1]]是否和str[k-1]相等,如果相等。 next[k] = next[k-1]+1， 如果不能，再看 str[next[next[k-1]]]的值，直到为-1，也就是没有一个相等的，此时next[k] = 0.</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/07/硬币/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2214,7 +2410,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -2237,7 +2433,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">4</span>
+                      
+                    
+                    <span class="site-state-item-count">5</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>
@@ -2442,6 +2640,8 @@
 
   
   
+    
+      
     
       
     
