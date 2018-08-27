@@ -108,27 +108,25 @@
 
 
 
-  <meta name="description" content="机器学习评估系统机器学习(ML),自然语言处理(NLP),信息检索(IR)等领域,评估(Evaluation)是一个必要的工作,而其评价指标往往有如下几点:准确率(Accuracy),精确率(Precision),召回率(Recall)和F1-Measure。     正类(positive) 负类(negative)     True TP TN   False FP（Type I Error）">
-<meta name="keywords" content="machine learning">
+  <meta name="description" content="第9条：慎重选择所要删除的元素删除元素提供了 remove 函数 具体如下 1ForwardIterator remove (ForwardIterator first, ForwardIterator last, const T&amp;amp; val); 返回值是一个迭代器，如果有n个元素被删除，则返回值就是 last - n remove 删除示例删除特定值12vector &amp;lt;int&amp;gt;">
+<meta name="keywords" content="C++">
 <meta property="og:type" content="article">
-<meta property="og:title" content="机器学习评估系统">
-<meta property="og:url" content="http://yoursite.com/2018/05/15/机器学习评估指标/index.html">
+<meta property="og:title" content="Effective STL 9">
+<meta property="og:url" content="http://yoursite.com/2018/08/27/ESTL9/index.html">
 <meta property="og:site_name" content="Andong&#39;s Blogs">
-<meta property="og:description" content="机器学习评估系统机器学习(ML),自然语言处理(NLP),信息检索(IR)等领域,评估(Evaluation)是一个必要的工作,而其评价指标往往有如下几点:准确率(Accuracy),精确率(Precision),召回率(Recall)和F1-Measure。     正类(positive) 负类(negative)     True TP TN   False FP（Type I Error）">
+<meta property="og:description" content="第9条：慎重选择所要删除的元素删除元素提供了 remove 函数 具体如下 1ForwardIterator remove (ForwardIterator first, ForwardIterator last, const T&amp;amp; val); 返回值是一个迭代器，如果有n个元素被删除，则返回值就是 last - n remove 删除示例删除特定值12vector &amp;lt;int&amp;gt;">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://github.com/Leeandong/markdown_pictures/raw/master/evaluation-and-credibilitypart-2-43-638.jpg">
-<meta property="og:updated_time" content="2018-06-15T10:58:03.620Z">
+<meta property="og:updated_time" content="2018-08-27T13:56:33.664Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="机器学习评估系统">
-<meta name="twitter:description" content="机器学习评估系统机器学习(ML),自然语言处理(NLP),信息检索(IR)等领域,评估(Evaluation)是一个必要的工作,而其评价指标往往有如下几点:准确率(Accuracy),精确率(Precision),召回率(Recall)和F1-Measure。     正类(positive) 负类(negative)     True TP TN   False FP（Type I Error）">
-<meta name="twitter:image" content="https://github.com/Leeandong/markdown_pictures/raw/master/evaluation-and-credibilitypart-2-43-638.jpg">
+<meta name="twitter:title" content="Effective STL 9">
+<meta name="twitter:description" content="第9条：慎重选择所要删除的元素删除元素提供了 remove 函数 具体如下 1ForwardIterator remove (ForwardIterator first, ForwardIterator last, const T&amp;amp; val); 返回值是一个迭代器，如果有n个元素被删除，则返回值就是 last - n remove 删除示例删除特定值12vector &amp;lt;int&amp;gt;">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/15/机器学习评估指标/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/08/27/ESTL9/"/>
 
 
 
@@ -138,7 +136,7 @@
   };
 </script>
 
-  <title>机器学习评估系统 | Andong's Blogs</title>
+  <title>Effective STL 9 | Andong's Blogs</title>
   
 
 
@@ -283,7 +281,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/15/机器学习评估指标/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/27/ESTL9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Andong Lee">
@@ -300,7 +298,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">机器学习评估系统
+          <h1 class="post-title" itemprop="name headline">Effective STL 9
               
             
           </h1>
@@ -325,24 +323,12 @@
                 
               
 
-              <time title="Created: 2018-05-15 14:32:12" itemprop="dateCreated datePublished" datetime="2018-05-15T14:32:12+08:00">2018-05-15</time>
+              <time title="Created: 2018-08-27 16:10:08 / Modified: 21:56:33" itemprop="dateCreated datePublished" datetime="2018-08-27T16:10:08+08:00">2018-08-27</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-06-15 18:58:03" itemprop="dateModified" datetime="2018-06-15T18:58:03+08:00">2018-06-15</time>
               
             
           </span>
@@ -375,37 +361,47 @@
       
 
       
-        <h2 id="机器学习评估系统"><a href="#机器学习评估系统" class="headerlink" title="机器学习评估系统"></a>机器学习评估系统</h2><p>机器学习(ML),自然语言处理(NLP),信息检索(IR)等领域,评估(Evaluation)是一个必要的工作,而其评价指标往往有如下几点:准确率(Accuracy),精确率(Precision),召回率(Recall)和F1-Measure。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left"></th>
-<th>正类(positive)</th>
-<th>负类(negative)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">True</td>
-<td>TP</td>
-<td>TN</td>
-</tr>
-<tr>
-<td style="text-align:left">False</td>
-<td>FP（Type I Error）</td>
-<td>FN(Type II Error)</td>
-</tr>
-</tbody>
-</table>
-<p>精确率(Precision)：Precision is the number of document retrieved that are relevant<br>$$<br>P=\frac{TP}{TP+FP}<br>$$<br>所有被划分为正样本中正确的比例。高精确率意味着分类中垃圾很少。</p>
-<p>召回率(recall)：Recall is the number of relevant document that are retrieved.<br>$$<br>R=\frac{TP}{TP+FN}<br>$$<br>所有的正样本中被正确分类所占的比例，高召回率意味着很少有相关的数据被遗漏。</p>
-<p>F1-measure :F1值就是精确值和召回率的调和均值<br>$$<br>\frac{1}{F1}=\frac{1}{P}+\frac{1}{R}<br>$$<br><img src="https://github.com/Leeandong/markdown_pictures/raw/master/evaluation-and-credibilitypart-2-43-638.jpg" alt=""></p>
-<hr>
-<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><ul>
-<li><a href="https://towardsdatascience.com/model-evaluation-i-precision-and-recall-166ddb257c7b" target="_blank" rel="noopener">Model Evaluation I: Precision And Recall</a></li>
-</ul>
+        <h3 id="第9条：慎重选择所要删除的元素"><a href="#第9条：慎重选择所要删除的元素" class="headerlink" title="第9条：慎重选择所要删除的元素"></a>第9条：慎重选择所要删除的元素</h3><p>删除元素<algorithm>提供了 remove 函数 具体如下</algorithm></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ForwardIterator remove (ForwardIterator first, ForwardIterator last, const T&amp; val);</span><br></pre></td></tr></table></figure>
+<p>返回值是一个迭代器，如果有n个元素被删除，则返回值就是 last - n</p>
+<h4 id="remove-删除示例"><a href="#remove-删除示例" class="headerlink" title="remove 删除示例"></a>remove 删除示例</h4><h5 id="删除特定值"><a href="#删除特定值" class="headerlink" title="删除特定值"></a>删除特定值</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span> &lt;<span class="keyword">int</span>&gt; v = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">5</span>&#125;</span><br><span class="line">remove(v.begin(), v.end(), <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<ol>
+<li>标出所有的空位: 1 (2) 3 (2) 5</li>
+<li>3向前移动，弥补第一个空位 1 3 (3) (2) 5</li>
+<li>5向前移动，弥补第二个空位 1 3 5 (2)  (5)</li>
+<li>剩下的元素没有可以过来填补空位的， 则删除结束，最终区间变为 1 3 5 2 5</li>
+</ol>
+<p>如此， 如果要完成我们理想的删除所有元素的工作，我们则应该使用</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">v.erase(remove(v.begin(), v.end(), <span class="number">2</span>), v.end());</span><br></pre></td></tr></table></figure>
+<p>remove 函数不能作用在关联容器上，关联容器若要完成删除某个值的元素直接调用 erase 函数即可</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> &lt;<span class="keyword">int</span>&gt; s = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">5</span>&#125;</span><br><span class="line">s.erase(<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+<h5 id="删除特定的表达式"><a href="#删除特定的表达式" class="headerlink" title="删除特定的表达式"></a>删除特定的表达式</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">badValue</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br></pre></td></tr></table></figure>
+<p>如果不是关联容器， 则将remove 对应换为 remove_if 即可</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span> &lt;<span class="keyword">int</span>&gt; v = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">5</span>&#125;</span><br><span class="line">v.erase(remove(v.begin(), v.end(), badValue), v.end());</span><br><span class="line"><span class="built_in">list</span> &lt;<span class="keyword">int</span>&gt; l = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">5</span>&#125;</span><br><span class="line">l.remove_if(badValue);</span><br></pre></td></tr></table></figure>
+<p>但对于关联容器则需要遍历来观察是否满足条件从而删除指定的元素,下面的做法是自然而然能想到的</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">AssocContainer &lt;<span class="keyword">int</span>&gt; c;</span><br><span class="line"><span class="keyword">for</span>(AssocContainer &lt;<span class="keyword">int</span>&gt; :: iterator i = c.begin(); i!=c.end(); ++i)&#123;</span><br><span class="line">    <span class="keyword">if</span> (badValue(*i)) c.erase(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但是这个做法是错误的。<strong>当容器内的一个元素被删除时，指向该元素的所有迭代器都会变得无效。</strong>也就是说，一旦c.erase(i) 返回， i 就成了无效值。上述循环中的 ++i自然也就是无效的。</p>
+<p>有一个简单的改正的方法，既然容器内的元素被删除时候，指向该元素的所有迭代器都会变得无效，那我们只要在调用erase之前，有一个迭代器能够指向c中的下一个元素就好了，也就是调用时使用后置递增就好了。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">AssocContainer &lt;<span class="keyword">int</span>&gt; c;</span><br><span class="line"><span class="keyword">for</span>(AssocContainer &lt;<span class="keyword">int</span>&gt; :: iterator i = c.begin(); i!=c.end(); )&#123;</span><br><span class="line">    <span class="keyword">if</span> (badValue(*i)) c.erase(i++);</span><br><span class="line">    <span class="keyword">else</span> ++i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>若想要用此种遍历来解决 vector , string, deque时， 无法进行，因为 这类容器调用erase时，不仅会使所指向被删除元素的迭代器无效，也会使被删除元素之后的所有迭代器都无效。</strong></p>
+<p>对于vector, string, deque， 我们需要采取不同的策略</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SeqContainer &lt;<span class="keyword">int</span>&gt; c;</span><br><span class="line"><span class="keyword">for</span>(SeqContainer &lt;<span class="keyword">int</span>&gt; :: iterator i = c.begin(); i!=c.end(); )&#123;</span><br><span class="line">    <span class="keyword">if</span> (badValue(*i)) i = c.erase(i);</span><br><span class="line">    <span class="keyword">else</span> ++i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注：原书中此处erase 能返回指向被删除元素的下个元素的迭代器，说是只对于标准序列容器才是如此，标准关联容器的返回值是void， 但C++11 中关联容器的erase 同样可以返回指向被删除元素的下个元素的迭代器。</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>要删除容器中所有特定值的所有对象：</p>
 <ul>
-<li><a href="https://blog.argcv.com/articles/1036.c" target="_blank" rel="noopener">准确率(Accuracy), 精确率(Precision), 召回率(Recall)和F1-Measure</a></li>
+<li>如果是vector, string, 或deque, 则使用 erase-remove</li>
+<li>如果容器是list， 则使用 list::remove</li>
+<li>如果容器是一个标准关联容器，则使用他的erase 成员函数</li>
+</ul>
+<p>要删除容器内满足条件的所有对象:</p>
+<ul>
+<li>如果是vector, string, 或deque, 则使用 erase-remove_if</li>
+<li>如果容器是list， 则使用 list::remove_if</li>
+<li>如果容器是一个标准关联容器，则使用循环判定加上erase 成员函数</li>
+</ul>
+<p>要在循环内部做某些(除了删除对象之外的操作):</p>
+<ul>
+<li>写一个循环来遍历容器中的元素，记住每次调用erase时，要用它的返回值来更新迭代器。</li>
 </ul>
 
       
@@ -427,7 +423,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/machine-learning/" rel="tag"># machine learning</a>
+            <a href="/tags/C/" rel="tag"># C++</a>
           
         </div>
       
@@ -440,8 +436,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/14/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2018/08/17/GoneFishing/" rel="next" title="GoneFishing">
+                <i class="fa fa-chevron-left"></i> GoneFishing
               </a>
             
           </div>
@@ -449,10 +445,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/05/18/Adaboost/" rel="prev" title="Adaboost">
-                Adaboost <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -589,7 +581,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#机器学习评估系统"><span class="nav-number">1.</span> <span class="nav-text">机器学习评估系统</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#参考"><span class="nav-number">1.0.1.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#第9条：慎重选择所要删除的元素"><span class="nav-number">1.</span> <span class="nav-text">第9条：慎重选择所要删除的元素</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#remove-删除示例"><span class="nav-number">1.1.</span> <span class="nav-text">remove 删除示例</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#删除特定值"><span class="nav-number">1.1.1.</span> <span class="nav-text">删除特定值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#删除特定的表达式"><span class="nav-number">1.1.2.</span> <span class="nav-text">删除特定的表达式</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-number">1.2.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
             
 
           </div>

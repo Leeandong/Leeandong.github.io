@@ -277,6 +277,187 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/27/ESTL9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Andong Lee">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andong's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/27/ESTL9/" itemprop="url">
+                  Effective STL 9
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-08-27 16:10:08 / Modified: 21:56:33" itemprop="dateCreated datePublished" datetime="2018-08-27T16:10:08+08:00">2018-08-27</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="第9条：慎重选择所要删除的元素"><a href="#第9条：慎重选择所要删除的元素" class="headerlink" title="第9条：慎重选择所要删除的元素"></a>第9条：慎重选择所要删除的元素</h3><p>删除元素<algorithm>提供了 remove 函数 具体如下</algorithm></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ForwardIterator remove (ForwardIterator first, ForwardIterator last, const T&amp; val);</span><br></pre></td></tr></table></figure>
+<p>返回值是一个迭代器，如果有n个元素被删除，则返回值就是 last - n</p>
+<h4 id="remove-删除示例"><a href="#remove-删除示例" class="headerlink" title="remove 删除示例"></a>remove 删除示例</h4><h5 id="删除特定值"><a href="#删除特定值" class="headerlink" title="删除特定值"></a>删除特定值</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span> &lt;<span class="keyword">int</span>&gt; v = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">5</span>&#125;</span><br><span class="line">remove(v.begin(), v.end(), <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<ol>
+<li>标出所有的空位: 1 (2) 3 (2) 5</li>
+<li>3向前移动，弥补第一个空位 1 3 (3) (2) 5</li>
+<li>5向前移动，弥补第二个空位 1 3 5 (2)  (5)</li>
+<li>剩下的元素没有可以过来填补空位的， 则删除结束，最终区间变为 1 3 5 2 5</li>
+</ol>
+<p>如此， 如果要完成我们理想的删除所有元素的工作，我们则应该使用</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">v.erase(remove(v.begin(), v.end(), <span class="number">2</span>), v.end());</span><br></pre></td></tr></table></figure>
+<p>remove 函数不能作用在关联容器上，关联容器若要完成删除某个值的元素直接调用 erase 函数即可</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> &lt;<span class="keyword">int</span>&gt; s = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">5</span>&#125;</span><br><span class="line">s.erase(<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+<h5 id="删除特定的表达式"><a href="#删除特定的表达式" class="headerlink" title="删除特定的表达式"></a>删除特定的表达式</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">badValue</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br></pre></td></tr></table></figure>
+<p>如果不是关联容器， 则将remove 对应换为 remove_if 即可</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span> &lt;<span class="keyword">int</span>&gt; v = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">5</span>&#125;</span><br><span class="line">v.erase(remove(v.begin(), v.end(), badValue), v.end());</span><br><span class="line"><span class="built_in">list</span> &lt;<span class="keyword">int</span>&gt; l = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">5</span>&#125;</span><br><span class="line">l.remove_if(badValue);</span><br></pre></td></tr></table></figure>
+<p>但对于关联容器则需要遍历来观察是否满足条件从而删除指定的元素,下面的做法是自然而然能想到的</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">AssocContainer &lt;<span class="keyword">int</span>&gt; c;</span><br><span class="line"><span class="keyword">for</span>(AssocContainer &lt;<span class="keyword">int</span>&gt; :: iterator i = c.begin(); i!=c.end(); ++i)&#123;</span><br><span class="line">    <span class="keyword">if</span> (badValue(*i)) c.erase(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但是这个做法是错误的。<strong>当容器内的一个元素被删除时，指向该元素的所有迭代器都会变得无效。</strong>也就是说，一旦c.erase(i) 返回， i 就成了无效值。上述循环中的 ++i自然也就是无效的。</p>
+<p>有一个简单的改正的方法，既然容器内的元素被删除时候，指向该元素的所有迭代器都会变得无效，那我们只要在调用erase之前，有一个迭代器能够指向c中的下一个元素就好了，也就是调用时使用后置递增就好了。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">AssocContainer &lt;<span class="keyword">int</span>&gt; c;</span><br><span class="line"><span class="keyword">for</span>(AssocContainer &lt;<span class="keyword">int</span>&gt; :: iterator i = c.begin(); i!=c.end(); )&#123;</span><br><span class="line">    <span class="keyword">if</span> (badValue(*i)) c.erase(i++);</span><br><span class="line">    <span class="keyword">else</span> ++i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>若想要用此种遍历来解决 vector , string, deque时， 无法进行，因为 这类容器调用erase时，不仅会使所指向被删除元素的迭代器无效，也会使被删除元素之后的所有迭代器都无效。</strong></p>
+<p>对于vector, string, deque， 我们需要采取不同的策略</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SeqContainer &lt;<span class="keyword">int</span>&gt; c;</span><br><span class="line"><span class="keyword">for</span>(SeqContainer &lt;<span class="keyword">int</span>&gt; :: iterator i = c.begin(); i!=c.end(); )&#123;</span><br><span class="line">    <span class="keyword">if</span> (badValue(*i)) i = c.erase(i);</span><br><span class="line">    <span class="keyword">else</span> ++i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注：原书中此处erase 能返回指向被删除元素的下个元素的迭代器，说是只对于标准序列容器才是如此，标准关联容器的返回值是void， 但C++11 中关联容器的erase 同样可以返回指向被删除元素的下个元素的迭代器。</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>要删除容器中所有特定值的所有对象：</p>
+<ul>
+<li>如果是vector, string, 或deque, 则使用 erase-remove</li>
+<li>如果容器是list， 则使用 list::remove</li>
+<li>如果容器是一个标准关联容器，则使用他的erase 成员函数</li>
+</ul>
+<p>要删除容器内满足条件的所有对象:</p>
+<ul>
+<li>如果是vector, string, 或deque, 则使用 erase-remove_if</li>
+<li>如果容器是list， 则使用 list::remove_if</li>
+<li>如果容器是一个标准关联容器，则使用循环判定加上erase 成员函数</li>
+</ul>
+<p>要在循环内部做某些(除了删除对象之外的操作):</p>
+<ul>
+<li>写一个循环来遍历容器中的元素，记住每次调用erase时，要用它的返回值来更新迭代器。</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/17/GoneFishing/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2151,168 +2332,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/21/排序算法复杂度分析/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Andong Lee">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Andong's Blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/21/排序算法复杂度分析/" itemprop="url">
-                  排序时间复杂度分析
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-05-21 09:35:06" itemprop="dateCreated datePublished" datetime="2018-05-21T09:35:06+08:00">2018-05-21</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-06-15 17:16:08" itemprop="dateModified" datetime="2018-06-15T17:16:08+08:00">2018-06-15</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>本篇主要分析一下常用的排序算法时间复杂度</p>
-<hr>
-<h3 id="快速排序："><a href="#快速排序：" class="headerlink" title="快速排序："></a>快速排序：</h3><h5 id="平均时间复杂度："><a href="#平均时间复杂度：" class="headerlink" title="平均时间复杂度："></a>平均时间复杂度：</h5><p>通过快速排序的定义我们可以自然的得到任意两个元素最多比较1次。</p>
-<p>我们令t为排序好的序列,即t=sort(p),</p>
-<p>定义随机变量$Y(n)$表示大小为n的数组再快速排序中所需要做的比较的次数</p>
-<p>再定义随机变量：<br>$$<br>X_{i,j} =<br>\begin{cases}<br>1 \quad if\;t_i\,and\,t_j\,are\,compared\,by\,quicksort\\<br>0 \quad otherwise<br>\end{cases}<br>$$<br>则<br>$$<br>Y(n)\le\sum_{i=1}^{n-1}\sum_{j=i+1}^{n}X_{i,j}<br>$$<br>由期望的线性可加性<br>$$<br>E[Y(n)]\le\sum_{i=1}^{n-1}\sum_{j=i+1}^{n}E[X_{i,j}]<br>$$<br>又由于X_{i,j}是一个indicator random variable, 则有　<br>$$<br>E[X_{i,j}] = P[X_{i,j}=1]<br>$$<br>又我们可以得到在序列中，两个元素相互比较当且仅当${t_i,t_{i+1},…t_j}$ 中$t_i$或者$t_j$ 被选中作为pivot。<br>$$<br>P[X_{i,j}=1] = \frac{2}{j-i+1}<br>$$<br>则可得<br>$$<br>\begin{aligned}<br>E[Y(n)]&amp;\le\sum_{i=1}^{n-1}\sum_{j=i+1}^{n} \frac{2}{j-i+1}\\<br>    &amp;= \sum_{i=1}^{n-1}\sum_{k=2}^{n-i+1}\frac{2}{k}\\<br>    &amp;\le 2n\sum_{i=1}^{n-1}H_n\\<br>    &amp;=2nH(n) \in O(nlogn)<br>\end{aligned}<br>$$</p>
-<hr>
-<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><ul>
-<li><a href="https://www.zhihu.com/question/22393997/answer/66651936" target="_blank" rel="noopener">如何证明快速排序法的平均复杂度为 O(nlogn)?</a></li>
-<li><a href="https://drive.google.com/file/d/0B4z2gzEmkDDCa0tNQWMtNTk1Z2s/view" target="_blank" rel="noopener">Randomized Algorithms</a></li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2360,7 +2379,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
