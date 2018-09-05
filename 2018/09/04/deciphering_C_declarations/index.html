@@ -108,25 +108,25 @@
 
 
 
-  <meta name="description" content="General Parameters: booster [default=gbtree]:  选择每一个iteration所使用的模型，有两个选项 gbtree: tree-based models gblinear: linear models   silent [default=0]：  运行的过程中是否打印信息 nthread [default to maximum number of t">
-<meta name="keywords" content="machine learning package">
+  <meta name="description" content="今天阅读 《STL 源码分析》 时遇到了这样的一个复杂的函数名 123static void (* set_malloc_handler(void (*f) ()))()&amp;#123;	...&amp;#125; 所以找到了right- left rules来解读这个函数名称 Right-left rules首先要明确当在 Declaration中遇到 Symbols 的读法。    * as “point">
+<meta name="keywords" content="C++">
 <meta property="og:type" content="article">
-<meta property="og:title" content="xboost调参">
-<meta property="og:url" content="http://yoursite.com/2018/05/27/xgboost调参/index.html">
+<meta property="og:title" content="deciphering C declarations">
+<meta property="og:url" content="http://yoursite.com/2018/09/04/deciphering_C_declarations/index.html">
 <meta property="og:site_name" content="Andong&#39;s Blogs">
-<meta property="og:description" content="General Parameters: booster [default=gbtree]:  选择每一个iteration所使用的模型，有两个选项 gbtree: tree-based models gblinear: linear models   silent [default=0]：  运行的过程中是否打印信息 nthread [default to maximum number of t">
+<meta property="og:description" content="今天阅读 《STL 源码分析》 时遇到了这样的一个复杂的函数名 123static void (* set_malloc_handler(void (*f) ()))()&amp;#123;	...&amp;#125; 所以找到了right- left rules来解读这个函数名称 Right-left rules首先要明确当在 Declaration中遇到 Symbols 的读法。    * as “point">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-06-15T10:07:12.739Z">
+<meta property="og:updated_time" content="2018-09-05T05:22:13.965Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="xboost调参">
-<meta name="twitter:description" content="General Parameters: booster [default=gbtree]:  选择每一个iteration所使用的模型，有两个选项 gbtree: tree-based models gblinear: linear models   silent [default=0]：  运行的过程中是否打印信息 nthread [default to maximum number of t">
+<meta name="twitter:title" content="deciphering C declarations">
+<meta name="twitter:description" content="今天阅读 《STL 源码分析》 时遇到了这样的一个复杂的函数名 123static void (* set_malloc_handler(void (*f) ()))()&amp;#123;	...&amp;#125; 所以找到了right- left rules来解读这个函数名称 Right-left rules首先要明确当在 Declaration中遇到 Symbols 的读法。    * as “point">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/27/xgboost调参/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/09/04/deciphering_C_declarations/"/>
 
 
 
@@ -136,7 +136,7 @@
   };
 </script>
 
-  <title>xboost调参 | Andong's Blogs</title>
+  <title>deciphering C declarations | Andong's Blogs</title>
   
 
 
@@ -281,7 +281,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/27/xgboost调参/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/04/deciphering_C_declarations/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Andong Lee">
@@ -298,7 +298,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">xboost调参
+          <h1 class="post-title" itemprop="name headline">deciphering C declarations
               
             
           </h1>
@@ -323,7 +323,7 @@
                 
               
 
-              <time title="Created: 2018-05-27 16:24:01" itemprop="dateCreated datePublished" datetime="2018-05-27T16:24:01+08:00">2018-05-27</time>
+              <time title="Created: 2018-09-04 13:25:03" itemprop="dateCreated datePublished" datetime="2018-09-04T13:25:03+08:00">2018-09-04</time>
             
 
             
@@ -340,7 +340,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-06-15 18:07:12" itemprop="dateModified" datetime="2018-06-15T18:07:12+08:00">2018-06-15</time>
+                <time title="Modified: 2018-09-05 13:22:13" itemprop="dateModified" datetime="2018-09-05T13:22:13+08:00">2018-09-05</time>
               
             
           </span>
@@ -373,59 +373,59 @@
       
 
       
-        <ol>
-<li><h3 id="General-Parameters"><a href="#General-Parameters" class="headerlink" title="General Parameters:"></a><strong>General Parameters:</strong></h3><ol>
-<li><strong>booster [default=gbtree]:</strong>  选择每一个iteration所使用的模型，有两个选项<ul>
-<li>gbtree: tree-based models</li>
-<li>gblinear: linear models</li>
-</ul>
-</li>
-<li><strong>silent [default=0]：</strong>  运行的过程中是否打印信息</li>
-<li><strong>nthread [default to maximum number of threads available if not set]</strong> </li>
+        <p>今天阅读 《STL 源码分析》 时遇到了这样的一个复杂的函数名</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">static void (* set_malloc_handler(void (*f) ()))()&#123;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>所以找到了right- left rules来解读这个函数名称</p>
+<h4 id="Right-left-rules"><a href="#Right-left-rules" class="headerlink" title="Right-left rules"></a>Right-left rules</h4><p>首先要明确当在 Declaration中遇到 Symbols 的读法。</p>
+<table>
+<thead>
+<tr>
+<th>*</th>
+<th>as “pointer to”</th>
+<th>- always on the left side</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[ ]</td>
+<td>as “array of”</td>
+<td>- always on the right side</td>
+</tr>
+<tr>
+<td>( )</td>
+<td>as “function returning”</td>
+<td>- always on the right side</td>
+</tr>
+</tbody>
+</table>
+<p>具体的过程</p>
+<ol>
+<li>找到identifier, 这就是你的起始点，对自己说 “identifier is “</li>
+<li>看identifier 右侧的 symbol, 如果是”( )”，那么就是“identifier is function returning ”, 如果是 [ ] ，则是”identifier is array of”. 继续向右读直到这个symbol 表示完成或者遇到 “)”</li>
+<li>看向 symbol 的左侧，如果不是上述的三个 symbols 之一(比如是 int)， 直接读出来，否则按上面的表格将它翻译成语句，直到完成这个 symbol 或者遇到了”(“</li>
 </ol>
+<p>不断的重复2， 3 步骤，直到完成这个声明。</p>
+<h5 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h5><ul>
+<li><p>int* p[ ]：” p is array  of point to int”</p>
 </li>
-<li><h3 id="Booster-Parameters-这里主要指的是gbtree的选项，gblinear用的很少"><a href="#Booster-Parameters-这里主要指的是gbtree的选项，gblinear用的很少" class="headerlink" title="Booster Parameters: 这里主要指的是gbtree的选项，gblinear用的很少"></a><strong>Booster Parameters:</strong> 这里主要指的是gbtree的选项，gblinear用的很少</h3><ol>
-<li><strong>eta [default=0.3]：</strong>给予每一个模型的权重，可以使得模型更坚固，但也会需要更多的模型，产生额外的开销。一般值的设定为0.01-0.2</li>
-<li><strong>min_child_weight [default=1]：</strong> 类似于gbm的<strong>min_samples_leaf</strong>选项，但是限定的是子结点中最小的样本权重的和，同样的，取较高的值可以防止过拟合(阻止模型挖掘属于特定数据的特定特征)，但太高了会造成欠拟合，应该用CV调整。</li>
-<li><strong>max_depth [default=6]：</strong> 最大树深，可用来控制过拟合，应该用CV调整，一般取值在3-10之间。</li>
-<li><strong>max_leaf_nodes:</strong> 树所能拥有的最大的叶子结点数目，如果该项定义，会忽略掉<strong>max_depth</strong> 的值。</li>
-<li><strong>gamma [default=0]:</strong> 节点分裂所需的最小的增益值。使模型更加conservative。</li>
-<li><strong>subsample [default=1]：</strong> 喂给每一颗树的数据集比例，值取得小使得模型更加坚固，防止过拟合，但太小了会造成欠拟合，一般取0.5-1。</li>
-<li><strong>colsample_bytree [default=1]：</strong> 分裂结点时所用的特征数目，一般取0.5-1。值取得过高可能会导致过拟合，但也取决于不同的样本。</li>
-<li><strong>lambda [default=1]:</strong> L2 regularization term的权重</li>
-<li><strong>alpha [default=0]:</strong>  L1 regularization term的权重，一般用在数据的维度非常高的时候，降低运行速度。</li>
-<li><strong>scale_pos_weight [default=1]:</strong>  用于不平衡的数据，控制数据的比例，一个典型的值的设定为 sum(negative cases) / sum(positive cases) </li>
-</ol>
+<li><p>int *(*func( ))( )： “func is point to function return point to function returning point to int”</p>
 </li>
-<li><h3 id="Learning-Task-Parameters"><a href="#Learning-Task-Parameters" class="headerlink" title="Learning Task Parameters"></a>Learning Task Parameters</h3><ol>
-<li><p><strong>objective [default=reg:linear]:</strong> 损失函数</p>
-<ul>
-<li><p><strong>binary:logistic</strong> –logistic regression for binary classification, returns predicted probability (not class)</p>
-</li>
-<li><p><strong>multi:softmax</strong> –multiclass classification using the softmax objective, returns predicted class (not probabilities)，使用时需要设置num_class的值。</p>
-</li>
-<li><p><strong>multi:softprob</strong> –same as softmax, but returns predicted probability of each data point belonging to each class.</p>
+<li><p>int (*(*fun_one)(char *,double))[9][20] ：  fun_one is point to function expecting(char*,  double) return point to array(size 9) of array(size 20) of int;</p>
 </li>
 </ul>
+<h5 id="不合法"><a href="#不合法" class="headerlink" title="不合法"></a>不合法</h5><p>但同时要注意很多declaration 本来就是不合法的，比如</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[]() - cannot have an <span class="built_in">array</span> of functions</span><br><span class="line">()() - cannot have a function that returns a function</span><br><span class="line">()[] - cannot have a function that returns an <span class="built_in">array</span></span><br></pre></td></tr></table></figure>
+<p>再回过头来看上面的例子</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">static void (* set_malloc_handler(void (*f) ()))()&#123;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> set_malloc_handler is  funtion expecting point to function( expecting nothing returning nothing) returning point to a function( expecting nothing returning nothing)</p>
+<p>换一个更简单易懂的的写法</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">void</span> <span class="params">(* function_pointer)</span> <span class="params">()</span></span>;</span><br><span class="line">function_point _set_malloc_handler(function_pointer _f)&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p><a href="http://cseweb.ucsd.edu/~ricko/rt_lt.rule.html" target="_blank" rel="noopener">“right-left” rule</a></p>
 </li>
-<li><strong>eval_metric [ default according to objective ]:</strong> The metric to be used for validation data. 默认的值为回归问题使用rmse，分类问题使用error。典型的值设定有；<ul>
-<li><strong>rmse</strong> – root mean square error</li>
-<li><strong>mae</strong> – mean absolute error</li>
-<li><strong>logloss</strong> – negative log-likelihood</li>
-<li><strong>error</strong> – Binary classification error rate (0.5 threshold)</li>
-<li><strong>merror</strong> – Multiclass classification error rate</li>
-<li><strong>mlogloss</strong> – Multiclass logloss</li>
-<li><strong>auc:</strong> Area under the curve</li>
-</ul>
-</li>
-<li><strong>seed [default=0]:</strong> 用来重复实验以及调参。</li>
-</ol>
+<li><p><a href="https://stackoverflow.com/questions/44350438/understanding-this-complex-declaration" target="_blank" rel="noopener">Understanding this complex declaration</a></p>
 </li>
 </ol>
-<hr>
-<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><ul>
-<li><a href="https://www.analyticsvidhya.com/blog/2016/03/complete-guide-parameter-tuning-xgboost-with-codes-python/" target="_blank" rel="noopener">Complete Guide to Parameter Tuning in XGBoost</a></li>
-</ul>
 
       
     </div>
@@ -446,7 +446,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/machine-learning-package/" rel="tag"># machine learning package</a>
+            <a href="/tags/C/" rel="tag"># C++</a>
           
         </div>
       
@@ -459,8 +459,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/21/排序算法复杂度分析/" rel="next" title="排序时间复杂度分析">
-                <i class="fa fa-chevron-left"></i> 排序时间复杂度分析
+              <a href="/2018/08/27/ESTL9/" rel="next" title="Effective STL 9">
+                <i class="fa fa-chevron-left"></i> Effective STL 9
               </a>
             
           </div>
@@ -468,10 +468,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/06/15/C++左值和右值/" rel="prev" title="C++左值和右值">
-                C++左值和右值 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -608,7 +604,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#General-Parameters"><span class="nav-number">1.</span> <span class="nav-text">General Parameters:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Booster-Parameters-这里主要指的是gbtree的选项，gblinear用的很少"><span class="nav-number">2.</span> <span class="nav-text">Booster Parameters: 这里主要指的是gbtree的选项，gblinear用的很少</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Learning-Task-Parameters"><span class="nav-number">3.</span> <span class="nav-text">Learning Task Parameters</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#参考"><span class="nav-number">3.1.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Right-left-rules"><span class="nav-number">1.</span> <span class="nav-text">Right-left rules</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#例子"><span class="nav-number">1.1.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#不合法"><span class="nav-number">1.2.</span> <span class="nav-text">不合法</span></a></li></ol></li></ol></div>
             
 
           </div>
